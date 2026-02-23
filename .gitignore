@@ -1,0 +1,6 @@
+venv/*
+tracknet/*
+*.pyc
+data/*
+PIPELINE_GUIDE.md
+yolo26s.pt

@@ -131,7 +131,6 @@ class StateClassifier:
         return {
             "states": states,
             "play_scores": play_scores,
-            "raw_scores": raw_scores,
             "features": features,
             "segments": segments,
             "summary": summary,

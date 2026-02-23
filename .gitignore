@@ -1,6 +1,7 @@
 venv/*
 tracknet/*
 *.pyc
-data/*
+data/output/*
+data/videos/*
 PIPELINE_GUIDE.md
 yolo26s.pt

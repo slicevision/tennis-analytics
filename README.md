@@ -5,10 +5,19 @@ Automatically classifies tennis video frames as **play** or **dead time** using 
 ## Setup
 
 ```bash
+git clone --recurse-submodules https://github.com/rlxai/tennis-analytics-phase-1.git
+cd tennis-analytics-phase-1
+python3 -m venv venv
+source venv/bin/activate
 pip install -r tracknet/requirements.txt
+pip install ultralytics
+
+sudo apt install ffmpeg   # required for H.264 video encoding
 ```
 
 ## Usage
+
+Place input videos in `data/videos/`, then run:
 
 ```bash
 python src/pipeline.py --video data/videos/clip.mp4

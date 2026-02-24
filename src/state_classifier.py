@@ -1,17 +1,15 @@
 import numpy as np
 from scipy.ndimage import uniform_filter1d, gaussian_filter1d
 
-from config import ClassifierConfig, BounceConfig
+from config import ClassifierConfig
 
 
 class StateClassifier:
     """Classifies each video frame as play (1) or dead (0)."""
 
-    def __init__(self, config: ClassifierConfig, fps: float,
-                 bounce_config: BounceConfig | None = None):
+    def __init__(self, config: ClassifierConfig, fps: float):
         self.cfg = config
         self.fps = fps
-        self.bounce_cfg = bounce_config
 
     # ------------------------------------------------------------------
     # Public API
@@ -20,7 +18,6 @@ class StateClassifier:
         self,
         ball_positions: list[tuple],
         player_data: list[dict],
-        bounce_analysis: dict | None = None,
     ) -> dict:
         """
         Classify every frame as play or dead.
@@ -59,14 +56,9 @@ class StateClassifier:
 
         player_smooth = uniform_filter1d(player_counts, size=w, mode="nearest")
 
-        # ------ Step 2b: dribble score from bounce analysis -----
-        dribble_score = None
-        if bounce_analysis is not None:
-            dribble_score = bounce_analysis.get("dribble_score")
-
         # ------ Step 3: weighted scoring ---------------------------------
         raw_scores = self._compute_play_score(
-            detection_rate, speed_smooth, player_smooth, dribble_score
+            detection_rate, speed_smooth, player_smooth
         )
 
         # ------ Step 4: Gaussian temporal smoothing ----------------------
@@ -101,7 +93,6 @@ class StateClassifier:
             "detection_rate": detection_rate,
             "speed_smooth": speed_smooth,
             "player_smooth": player_smooth,
-            "dribble_score": dribble_score,
         }
 
         print(f"  [Classifier] Ball detected: "
@@ -110,10 +101,6 @@ class StateClassifier:
         print(f"  [Classifier] Avg ball speed (when detected): "
               f"{speeds[speeds > 0].mean():.1f} px/frame" if speeds.any()
               else "  [Classifier] No ball speed data")
-        if dribble_score is not None:
-            drib_pct = 100 * np.mean(dribble_score > 0.1)
-            print(f"  [Classifier] Dribble signal active in "
-                  f"{drib_pct:.1f}% of frames")
         if self.cfg.use_bbox_gate:
             print(f"  [Classifier] Bbox gate suppressed {gate_suppressions} "
                   f"dead\u2192play transitions")
@@ -145,7 +132,6 @@ class StateClassifier:
         detection_rate: np.ndarray,
         speed_smooth: np.ndarray,
         player_smooth: np.ndarray,
-        dribble_score: np.ndarray | None = None,
     ) -> np.ndarray:
         """Weighted combination of normalised signals → play score in [0, 1]."""
         c = self.cfg
@@ -157,13 +143,6 @@ class StateClassifier:
         score = (c.weight_detection_rate * det_norm
                  + c.weight_ball_speed * spd_norm
                  + c.weight_player_count * plr_norm)
-
-        # Apply dribble penalty
-        if dribble_score is not None and self.bounce_cfg is not None:
-            penalty = self.bounce_cfg.weight_dribble * np.clip(
-                dribble_score, 0.0, 1.0
-            )
-            score = np.clip(score - penalty, 0.0, 1.0)
 
         return score
 

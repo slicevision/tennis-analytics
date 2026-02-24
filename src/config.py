@@ -73,33 +73,11 @@ class ClassifierConfig:
 
 
 @dataclass
-class BounceConfig:
-    """Bounce detection and dribble classification settings."""
-    # --- Subtrack construction ---
-    max_gap: int = 4              # max missing frames before split
-    max_jump: float = 50.0        # max px/frame speed before split
-    min_track_len: int = 3        # min detections per subtrack
-
-    # --- Bounce detection ---
-    min_vy_change: float = 3.0    # min |vy| in px/frame
-
-    # --- Dribble classification ---
-    min_dribble_bounces: int = 2
-    max_dribble_y_range: float = 200.0  # max y-amplitude (px)
-    dribble_bbox_ratio: float = 0.4
-    dribble_window: int = 25      # smoothing window (frames)
-
-    # --- Classifier integration ---
-    weight_dribble: float = 0.15
-
-
-@dataclass
 class PipelineConfig:
     """Top-level pipeline configuration."""
     tracknet: TrackNetConfig = field(default_factory=TrackNetConfig)
     yolo: YOLOConfig = field(default_factory=YOLOConfig)
     classifier: ClassifierConfig = field(default_factory=ClassifierConfig)
-    bounce: BounceConfig = field(default_factory=BounceConfig)
     device: str = "cuda"
     use_fp16: bool = True
     # Chunk size for processing (frames). 0 = auto-calculate from available RAM.

@@ -33,7 +33,6 @@ if os.path.join(_PROJECT_ROOT, "tracknet") not in sys.path:
 from config import PipelineConfig          # noqa: E402
 from ball_tracker import BallTracker       # noqa: E402
 from player_detector import PlayerDetector # noqa: E402
-from bounce_detector import BounceDetector # noqa: E402
 from state_classifier import StateClassifier  # noqa: E402
 
 
@@ -556,22 +555,11 @@ def run_pipeline(video_path: str, output_dir: str, config: PipelineConfig):
         f"Player data {len(all_player_data)} != {total_frames} frames"
 
     # ------------------------------------------------------------------
-    # Phase 2b – Bounce / dribble analysis
-    # ------------------------------------------------------------------
-    print("[Phase 2b] Bounce & dribble analysis …")
-    bounce_detector = BounceDetector(config.bounce, fps=fps)
-    bounce_analysis = bounce_detector.analyse(all_ball_positions, all_player_data)
-    del bounce_detector
-    print()
-
-    # ------------------------------------------------------------------
     # Phase 3 – State classification
     # ------------------------------------------------------------------
     print("[Phase 3] Classifying play/dead states …")
-    classifier = StateClassifier(config.classifier, fps=fps,
-                                 bounce_config=config.bounce)
-    classification = classifier.classify(all_ball_positions, all_player_data,
-                                         bounce_analysis=bounce_analysis)
+    classifier = StateClassifier(config.classifier, fps=fps)
+    classification = classifier.classify(all_ball_positions, all_player_data)
     print()
 
     states = classification["states"]

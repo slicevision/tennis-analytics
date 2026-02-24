@@ -34,6 +34,7 @@ from config import PipelineConfig          # noqa: E402
 from ball_tracker import BallTracker       # noqa: E402
 from player_detector import PlayerDetector # noqa: E402
 from state_classifier import StateClassifier  # noqa: E402
+from court_detector import CourtDetector   # noqa: E402
 
 
 # ===================================================================
@@ -110,6 +111,7 @@ def render_output_video(
     states: np.ndarray,
     play_scores: np.ndarray,
     fps: float,
+    court_polygon: np.ndarray | None = None,
 ):
     """Re-read the source video and write an annotated copy."""
     cap = cv2.VideoCapture(video_path)
@@ -145,6 +147,10 @@ def render_output_video(
             fps, width, height,
             timeline_colours,
         )
+        if court_polygon is not None:
+            pts = court_polygon.astype(np.int32).reshape((-1, 1, 2))
+            cv2.polylines(annotated, [pts], True, (255, 255, 0), 1,
+                          cv2.LINE_AA)
         writer.write(annotated)
         frame_idx += 1
 
@@ -472,6 +478,23 @@ def run_pipeline(video_path: str, output_dir: str, config: PipelineConfig):
     print()
 
     # ------------------------------------------------------------------
+    # Phase 1b – Court region detection
+    # ------------------------------------------------------------------
+    court_detector = None
+    if config.court.enabled:
+        print("[Phase 1b] Detecting court region …")
+        court_detector = CourtDetector(config.court)
+        sample_frames = decode_chunk(video_path, 0, 1)
+        if sample_frames:
+            court_detector.detect(sample_frames[0])
+            del sample_frames
+        if not court_detector.detected:
+            print("  Court detection failed — processing full frame "
+                  "(no ROI filtering)")
+            court_detector = None
+        print()
+
+    # ------------------------------------------------------------------
     # Phase 2 – Chunked detection
     # ------------------------------------------------------------------
     print("[Phase 2] Loading models …")
@@ -515,6 +538,19 @@ def run_pipeline(video_path: str, output_dir: str, config: PipelineConfig):
         else:
             yolo_frames = chunk_frames
         player_dat = player_detector.detect(yolo_frames)
+
+        # --- Court ROI filtering ---
+        if court_detector is not None and court_detector.detected:
+            pre_ball = sum(1 for p in ball_pos if p[0] is not None)
+            ball_pos = court_detector.filter_ball_positions(ball_pos)
+            post_ball = sum(1 for p in ball_pos if p[0] is not None)
+
+            pre_players = sum(d["count"] for d in player_dat)
+            player_dat = court_detector.filter_player_data_list(player_dat)
+            post_players = sum(d["count"] for d in player_dat)
+
+            print(f"  [CourtROI] Balls kept: {post_ball}/{pre_ball}  |  "
+                  f"Player boxes kept: {post_players}/{pre_players}")
 
         # --- Accumulate ---
         all_ball_positions.extend(ball_pos)
@@ -572,10 +608,17 @@ def run_pipeline(video_path: str, output_dir: str, config: PipelineConfig):
 
     # 4a. Annotated video
     out_video = os.path.join(output_dir, f"{base_name}_analysis.mp4")
+    court_poly = (
+        court_detector.padded_polygon
+        if court_detector is not None and court_detector.detected
+        and config.court.debug_overlay
+        else None
+    )
     render_output_video(
         video_path, out_video,
         all_ball_positions, all_player_data,
         states, play_scores, fps,
+        court_polygon=court_poly,
     )
 
     # 4b. JSON report
@@ -595,6 +638,12 @@ def run_pipeline(video_path: str, output_dir: str, config: PipelineConfig):
     print(f"  Total wall time   : {total_elapsed:.1f}s")
     print(f"  Video duration    : {_fmt_time(summary['total_duration'])}")
     print(f"  Speed             : {summary['total_duration']/total_elapsed:.1f}× realtime")
+    if court_detector is not None and court_detector.detected:
+        print(f"  Court filtering   : Active "
+              f"(padding {config.court.padding_px}px)")
+    else:
+        print(f"  Court filtering   : "
+              f"{'Disabled' if not config.court.enabled else 'Not detected'}")
     print(f"  Play time         : {summary['play_time']:.1f}s  "
           f"({summary['play_pct']:.1f}%)")
     print(f"  Dead time         : {summary['dead_time']:.1f}s  "
@@ -635,6 +684,12 @@ def parse_args():
                    help="Vertical bbox expansion ratio (default: 0.30)")
     p.add_argument("--no-bbox-gate", action="store_true",
                    help="Disable the ball-in-bbox dead→play gate")
+    p.add_argument("--no-court-detection", action="store_true",
+                   help="Disable automatic court region detection")
+    p.add_argument("--court-padding", type=int, default=None,
+                   help="Court sideline padding in pixels (default: 350)")
+    p.add_argument("--court-debug", action="store_true",
+                   help="Draw padded court boundary on output video")
     return p.parse_args()
 
 
@@ -657,6 +712,12 @@ def main():
         config.yolo.bbox_expand_v = args.bbox_expand_v
     if args.no_bbox_gate:
         config.classifier.use_bbox_gate = False
+    if args.no_court_detection:
+        config.court.enabled = False
+    if args.court_padding is not None:
+        config.court.padding_px = args.court_padding
+    if args.court_debug:
+        config.court.debug_overlay = True
 
     run_pipeline(args.video, args.output, config)
 

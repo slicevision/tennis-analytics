@@ -73,11 +73,33 @@ class ClassifierConfig:
 
 
 @dataclass
+class CourtDetectorConfig:
+    """Sideline-based court region detection settings."""
+    enabled: bool = True
+    # Perpendicular padding from each detected sideline (pixels)
+    padding_px: int = 350
+    # Steep line detection (sideline candidates)
+    steep_min_angle: float = 20.0     # min degrees from horizontal
+    hough_threshold: int = 50
+    min_line_length: int = 150        # min segment length (pixels)
+    max_line_gap: int = 15            # max gap to merge segments
+    # Canny edge detection
+    canny_low: int = 30
+    canny_high: int = 100
+    # Polygon validation (fraction of frame area)
+    min_court_area_pct: float = 0.05
+    max_court_area_pct: float = 0.95
+    # Debug: draw padded boundary on output video
+    debug_overlay: bool = False
+
+
+@dataclass
 class PipelineConfig:
     """Top-level pipeline configuration."""
     tracknet: TrackNetConfig = field(default_factory=TrackNetConfig)
     yolo: YOLOConfig = field(default_factory=YOLOConfig)
     classifier: ClassifierConfig = field(default_factory=ClassifierConfig)
+    court: CourtDetectorConfig = field(default_factory=CourtDetectorConfig)
     device: str = "cuda"
     use_fp16: bool = True
     # Chunk size for processing (frames). 0 = auto-calculate from available RAM.

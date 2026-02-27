@@ -1,0 +1,63 @@
+# ──────────────────────────────────────────────────────────────────
+#  Tennis Pipeline Configuration
+# ──────────────────────────────────────────────────────────────────
+#  Only values you set here override the built-in defaults.
+#  Remove or comment out any key to fall back to its default.
+# ──────────────────────────────────────────────────────────────────
+
+# ── Models ────────────────────────────────────────────────────────
+tracknet:
+  model_path: "tracknet/weights/model_best.pt"
+  batch_size: 16
+  outlier_max_dist: 100.0       # max px jump between frames before removal
+
+yolo:
+  model_path: "yolo26s.pt"
+  batch_size: 32
+  conf_threshold: 0.45          # detection confidence cutoff
+  bbox_expand_h: 0.60           # horizontal bbox expansion for ball gate
+  bbox_expand_v: 0.30           # vertical bbox expansion for ball gate
+
+# ── Classifier ────────────────────────────────────────────────────
+classifier:
+  # Scoring weights (must sum to 1.0)
+  weight_detection_rate: 0.45
+  weight_ball_speed: 0.35
+  weight_player_count: 0.20
+
+  # Normalization caps
+  detection_rate_cap: 0.40
+  ball_speed_cap: 8.0           # px/frame at 1080p reference
+
+  # Temporal smoothing
+  window_size: 25               # rolling window (frames)
+  smooth_sigma: 12.5            # Gaussian sigma (frames)
+
+  # Hysteresis thresholds
+  enter_play_threshold: 0.55
+  exit_play_threshold: 0.35
+
+  # Ball-in-bbox gate (suppresses false play transitions)
+  use_bbox_gate: true
+  bbox_gate_lookback: 13        # frames to check
+  bbox_gate_ratio: 0.5          # suppression ratio
+
+  # Minimum segment durations (seconds)
+  min_play_duration: 1.5
+  min_dead_duration: 2.0
+
+  # Isolated play filter
+  use_isolated_play_filter: true
+  isolated_max_play: 3.0        # max play segment to target (seconds)
+  isolated_dead_ratio: 2.5      # play-to-surrounding-dead ratio
+
+# ── Court Detection ───────────────────────────────────────────────
+court:
+  enabled: true
+  padding_px: 350               # sideline padding (pixels)
+  debug_overlay: false           # draw court boundary on output video
+
+# ── Pipeline ──────────────────────────────────────────────────────
+render_video: true               # false = JSON report only (skip video rendering)
+device: "cuda"                   # "cuda" or "cpu"
+chunk_frames: 0                  # 0 = auto-calculate from available RAM

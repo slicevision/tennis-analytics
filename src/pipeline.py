@@ -30,7 +30,7 @@ if _SCRIPT_DIR not in sys.path:
 if os.path.join(_PROJECT_ROOT, "tracknet") not in sys.path:
     sys.path.insert(0, os.path.join(_PROJECT_ROOT, "tracknet"))
 
-from config import PipelineConfig          # noqa: E402
+from config import PipelineConfig, load_config  # noqa: E402
 from ball_tracker import BallTracker       # noqa: E402
 from player_detector import PlayerDetector # noqa: E402
 from state_classifier import StateClassifier  # noqa: E402
@@ -119,9 +119,6 @@ def render_output_video(
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     total_frames = len(states)
 
-    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-    writer = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
-
     timeline_colours = np.zeros((width, 3), dtype=np.uint8)
     for px in range(width):
         fi = min(int(px / width * total_frames), total_frames - 1)
@@ -129,6 +126,32 @@ def render_output_video(
             timeline_colours[px] = (0, 180, 0)
         else:
             timeline_colours[px] = (0, 0, 180)
+
+    # Try to pipe directly to ffmpeg for single-pass H.264 encoding
+    ffmpeg_proc = None
+    writer = None
+    try:
+        ffmpeg_proc = subprocess.Popen(
+            [
+                "ffmpeg", "-y", "-loglevel", "error",
+                "-f", "rawvideo", "-vcodec", "rawvideo",
+                "-s", f"{width}x{height}", "-pix_fmt", "bgr24",
+                "-r", str(fps),
+                "-i", "-",
+                "-c:v", "libx264", "-preset", "fast",
+                "-crf", "23", "-pix_fmt", "yuv420p",
+                "-movflags", "+faststart",
+                "-an", output_path,
+            ],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+        )
+    except FileNotFoundError:
+        # ffmpeg not installed — fall back to OpenCV VideoWriter
+        fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+        writer = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
+        print("  [Render] ffmpeg not found — falling back to mp4v codec")
 
     t0 = time.perf_counter()
     frame_idx = 0
@@ -151,7 +174,15 @@ def render_output_video(
             pts = court_polygon.astype(np.int32).reshape((-1, 1, 2))
             cv2.polylines(annotated, [pts], True, (255, 255, 0), 1,
                           cv2.LINE_AA)
-        writer.write(annotated)
+
+        if ffmpeg_proc is not None:
+            try:
+                ffmpeg_proc.stdin.write(annotated.tobytes())
+            except BrokenPipeError:
+                print(f"  [Render] ffmpeg pipe broke at frame {frame_idx}")
+                break
+        else:
+            writer.write(annotated)
         frame_idx += 1
 
         if frame_idx % 500 == 0:
@@ -159,33 +190,18 @@ def render_output_video(
             print(f"  [Render] {frame_idx}/{total_frames} frames  "
                   f"({elapsed:.1f}s)")
 
-    writer.release()
     cap.release()
 
-    t_render = time.perf_counter() - t0
-
-    # Re-encode to H.264
-    tmp_path = output_path + ".tmp.mp4"
-    os.rename(output_path, tmp_path)
-    try:
-        subprocess.run(
-            [
-                "ffmpeg", "-y", "-i", tmp_path,
-                "-c:v", "libx264", "-preset", "fast",
-                "-crf", "23", "-pix_fmt", "yuv420p",
-                "-movflags", "+faststart",
-                "-an",
-                output_path,
-            ],
-            check=True,
-            capture_output=True,
-        )
-        os.remove(tmp_path)
-        print(f"  [Render] Re-encoded to H.264")
-    except (subprocess.CalledProcessError, FileNotFoundError) as e:
-        if os.path.exists(tmp_path):
-            os.rename(tmp_path, output_path)
-        print(f"  [Render] H.264 re-encode skipped (ffmpeg issue)")
+    if ffmpeg_proc is not None:
+        ffmpeg_proc.stdin.close()
+        ffmpeg_proc.wait()
+        if ffmpeg_proc.returncode == 0:
+            print(f"  [Render] Encoded to H.264 (single pass)")
+        else:
+            stderr = ffmpeg_proc.stderr.read().decode(errors="replace")
+            print(f"  [Render] ffmpeg error: {stderr[:300]}")
+    elif writer is not None:
+        writer.release()
 
     t_total = time.perf_counter() - t0
     size_mb = os.path.getsize(output_path) / 1e6
@@ -217,7 +233,7 @@ def _annotate_frame(
     cv2.addWeighted(overlay, 0.40, out, 0.60, 0, out)
 
     # State label
-    label = "\u25B6 PLAY" if state == 1 else "\u23F8 DEAD"
+    label = "> PLAY" if state == 1 else "|| DEAD"
     cv2.putText(out, label, (12, 32),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 255, 255), 2,
                 cv2.LINE_AA)
@@ -505,23 +521,39 @@ def run_pipeline(video_path: str, output_dir: str, config: PipelineConfig):
     all_ball_positions = []
     all_player_data = []
 
+    # Open video once and read sequentially (avoids per-chunk seek overhead)
+    cap = cv2.VideoCapture(video_path)
+    overlap_frames: list[np.ndarray] = []
+
     for c_idx in range(n_chunks):
         chunk_start = c_idx * chunk_size
         chunk_end = min(chunk_start + chunk_size, total_frames)
         n_in_chunk = chunk_end - chunk_start
 
-        if c_idx > 0:
-            decode_start = chunk_start - tracknet_overlap
-        else:
-            decode_start = chunk_start
-        decode_count = chunk_end - decode_start
-
         print(f"[Chunk {c_idx+1}/{n_chunks}] Frames {chunk_start}–{chunk_end-1} "
               f"({n_in_chunk} frames, {_fmt_time(n_in_chunk/fps)})")
 
-        # --- Decode chunk ---
+        # --- Decode chunk (sequential read, no seeking) ---
         t_dec = time.perf_counter()
-        chunk_frames = decode_chunk(video_path, decode_start, decode_count)
+        new_frames: list[np.ndarray] = []
+        for _ in range(n_in_chunk):
+            ret, frame = cap.read()
+            if not ret:
+                break
+            new_frames.append(frame)
+
+        # Prepend overlap frames for TrackNet's 3-frame sliding window
+        if c_idx > 0 and overlap_frames:
+            chunk_frames = overlap_frames + new_frames
+        else:
+            chunk_frames = new_frames
+
+        # Keep last frames for next chunk's overlap
+        if len(new_frames) >= tracknet_overlap:
+            overlap_frames = new_frames[-tracknet_overlap:]
+        else:
+            overlap_frames = list(new_frames)
+
         print(f"  Decoded {len(chunk_frames)} frames in "
               f"{time.perf_counter()-t_dec:.1f}s")
 
@@ -556,7 +588,7 @@ def run_pipeline(video_path: str, output_dir: str, config: PipelineConfig):
         all_ball_positions.extend(ball_pos)
         all_player_data.extend(player_dat)
 
-        del chunk_frames, yolo_frames, ball_pos, player_dat
+        del chunk_frames, new_frames, yolo_frames, ball_pos, player_dat
         torch.cuda.empty_cache()
 
         gc.collect()
@@ -577,6 +609,9 @@ def run_pipeline(video_path: str, output_dir: str, config: PipelineConfig):
               f"  |  RSS: {rss_mb:.0f} MB{eta_str}")
         print()
 
+    cap.release()
+    del overlap_frames
+
     # Free models
     del ball_tracker, player_detector
     torch.cuda.empty_cache()
@@ -594,7 +629,8 @@ def run_pipeline(video_path: str, output_dir: str, config: PipelineConfig):
     # Phase 3 – State classification
     # ------------------------------------------------------------------
     print("[Phase 3] Classifying play/dead states …")
-    classifier = StateClassifier(config.classifier, fps=fps)
+    classifier = StateClassifier(config.classifier, fps=fps,
+                                  frame_width=vid_w, frame_height=vid_h)
     classification = classifier.classify(all_ball_positions, all_player_data)
     print()
 
@@ -607,19 +643,23 @@ def run_pipeline(video_path: str, output_dir: str, config: PipelineConfig):
     print("[Phase 4] Generating outputs …")
 
     # 4a. Annotated video
-    out_video = os.path.join(output_dir, f"{base_name}_analysis.mp4")
-    court_poly = (
-        court_detector.padded_polygon
-        if court_detector is not None and court_detector.detected
-        and config.court.debug_overlay
-        else None
-    )
-    render_output_video(
-        video_path, out_video,
-        all_ball_positions, all_player_data,
-        states, play_scores, fps,
-        court_polygon=court_poly,
-    )
+    out_video = None
+    if config.render_video:
+        out_video = os.path.join(output_dir, f"{base_name}_analysis.mp4")
+        court_poly = (
+            court_detector.padded_polygon
+            if court_detector is not None and court_detector.detected
+            and config.court.debug_overlay
+            else None
+        )
+        render_output_video(
+            video_path, out_video,
+            all_ball_positions, all_player_data,
+            states, play_scores, fps,
+            court_polygon=court_poly,
+        )
+    else:
+        print("  [Render] Skipped (render_video: false)")
 
     # 4b. JSON report
     out_json = os.path.join(output_dir, f"{base_name}_report.json")
@@ -651,7 +691,10 @@ def run_pipeline(video_path: str, output_dir: str, config: PipelineConfig):
     print(f"  Segments          : {summary['num_segments']} total  "
           f"({summary['num_play_segments']} play, "
           f"{summary['num_dead_segments']} dead)")
-    print(f"  Output video      : {out_video}")
+    if out_video:
+        print(f"  Output video      : {out_video}")
+    else:
+        print(f"  Output video      : (skipped)")
     print(f"  Output report     : {out_json}")
     print("=" * 64)
 
@@ -668,6 +711,8 @@ def parse_args():
                    help="Path to input video file")
     p.add_argument("--output", default="data/output",
                    help="Output directory (default: data/output)")
+    p.add_argument("--config", default=None,
+                   help="Path to YAML config file (default: config.yaml if it exists)")
 
     # Optional overrides
     p.add_argument("--tracknet-batch", type=int, default=None,
@@ -695,7 +740,17 @@ def parse_args():
 
 def main():
     args = parse_args()
-    config = PipelineConfig()
+
+    # Resolve config file: explicit --config > default config.yaml > built-in defaults
+    config_path = args.config
+    if config_path is None:
+        default_path = os.path.join(_PROJECT_ROOT, "config", "config.yaml")
+        if os.path.isfile(default_path):
+            config_path = default_path
+
+    config = load_config(config_path)
+    if config_path:
+        print(f"  Loaded config: {config_path}")
 
     # Apply CLI overrides
     if args.tracknet_batch is not None:

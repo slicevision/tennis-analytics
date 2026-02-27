@@ -7,9 +7,15 @@ from config import ClassifierConfig
 class StateClassifier:
     """Classifies each video frame as play (1) or dead (0)."""
 
-    def __init__(self, config: ClassifierConfig, fps: float):
+    def __init__(self, config: ClassifierConfig, fps: float,
+                 frame_width: int = 1920, frame_height: int = 1080):
         self.cfg = config
         self.fps = fps
+        # Scale factor to normalise pixel speeds to the reference resolution
+        ref_diag = (config.ball_speed_ref_width ** 2
+                    + config.ball_speed_ref_height ** 2) ** 0.5
+        actual_diag = (frame_width ** 2 + frame_height ** 2) ** 0.5
+        self._speed_scale = ref_diag / actual_diag if actual_diag > 0 else 1.0
 
     # ------------------------------------------------------------------
     # Public API
@@ -43,6 +49,8 @@ class StateClassifier:
                 dx = ball_positions[i][0] - ball_positions[i-1][0]
                 dy = ball_positions[i][1] - ball_positions[i-1][1]
                 speeds[i] = np.sqrt(dx * dx + dy * dy)
+        # Normalise to reference resolution so ball_speed_cap is resolution-invariant
+        speeds *= self._speed_scale
 
         player_counts = np.array(
             [d["count"] for d in player_data], dtype=np.float64

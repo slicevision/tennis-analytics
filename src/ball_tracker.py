@@ -32,6 +32,12 @@ class BallTracker:
         model.load_state_dict(state)
         model = model.to(self.device)
         model.eval()
+        if self.device == "cuda":
+            try:
+                model = torch.compile(model)
+                print("  [BallTracker] Model compiled with torch.compile")
+            except Exception as exc:
+                print(f"  [BallTracker] torch.compile unavailable: {exc}")
         return model
 
     # ------------------------------------------------------------------
@@ -54,15 +60,7 @@ class BallTracker:
         scale_x = video_w / w
         scale_y = video_h / h
 
-        # --- Step 1: pre-resize all frames ---
-        t0 = time.perf_counter()
-        resized = np.empty((n, h, w, 3), dtype=np.uint8)
-        for i in range(n):
-            resized[i] = cv2.resize(frames[i], (w, h))
-        t_resize = time.perf_counter() - t0
-        print(f"  [BallTracker] Resized {n} frames in {t_resize:.1f}s")
-
-        # --- Step 2: batched inference ------------------------------------
+        # --- Batched inference with per-batch resize ----------------------
         ball_positions = [(None, None)] * 2   # first 2 frames: no data
         num_windows = n - 2
         bs = self.cfg.batch_size
@@ -75,11 +73,17 @@ class BallTracker:
                 end = min(start + bs, num_windows)
                 actual_bs = end - start
 
-                # Build 3-frame windows
-                frame_indices = np.arange(start + 2, end + 2)
-                curr = resized[frame_indices]
-                prev = resized[frame_indices - 1]
-                pprev = resized[frame_indices - 2]
+                # Resize only the frames needed for this batch's
+                # 3-frame sliding windows: indices start .. end+1
+                n_needed = actual_bs + 2
+                batch_resized = np.empty((n_needed, h, w, 3), dtype=np.uint8)
+                for i in range(n_needed):
+                    batch_resized[i] = cv2.resize(frames[start + i], (w, h))
+
+                # Build 3-frame windows from the per-batch buffer
+                pprev = batch_resized[:actual_bs]
+                prev = batch_resized[1:actual_bs + 1]
+                curr = batch_resized[2:actual_bs + 2]
 
                 windows = np.concatenate([curr, prev, pprev], axis=3)
                 windows = np.ascontiguousarray(windows.transpose(0, 3, 1, 2))
@@ -107,7 +111,6 @@ class BallTracker:
                     print(f"  [BallTracker] Batch {b_idx+1}/{n_batches}  "
                           f"({elapsed:.1f}s elapsed)")
 
-        del resized
         gc.collect()
 
         t_infer = time.perf_counter() - t0

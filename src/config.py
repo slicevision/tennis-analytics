@@ -1,4 +1,66 @@
-from dataclasses import dataclass, field
+from __future__ import annotations
+
+from dataclasses import dataclass, field, fields
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+
+# ===================================================================
+#  YAML loader
+# ===================================================================
+def _apply_dict(dc_instance: Any, overrides: dict) -> None:
+    """Recursively apply a flat dict of overrides onto a dataclass instance."""
+    for key, value in overrides.items():
+        if not hasattr(dc_instance, key):
+            continue
+        current = getattr(dc_instance, key)
+        # If the current attribute is itself a dataclass, recurse
+        if hasattr(current, "__dataclass_fields__") and isinstance(value, dict):
+            _apply_dict(current, value)
+        else:
+            setattr(dc_instance, key, type(current)(value))
+
+
+def load_config(yaml_path: str | Path | None = None) -> "PipelineConfig":
+    """Create a PipelineConfig, optionally loading overrides from a YAML file.
+
+    Any key present in the YAML overrides the built-in default; keys
+    absent from the YAML keep their default values.
+    """
+    config = PipelineConfig()
+    if yaml_path is None:
+        return config
+
+    path = Path(yaml_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Config file not found: {path}")
+
+    with open(path) as f:
+        raw = yaml.safe_load(f)
+
+    if not isinstance(raw, dict):
+        return config
+
+    # Top-level scalar overrides (device, chunk_frames)
+    for key in ("device", "chunk_frames", "use_fp16", "render_video"):
+        if key in raw:
+            setattr(config, key, type(getattr(config, key))(raw[key]))
+
+    # Sub-config sections
+    section_map = {
+        "tracknet": config.tracknet,
+        "yolo": config.yolo,
+        "classifier": config.classifier,
+        "court": config.court,
+    }
+    for section_name, dc_instance in section_map.items():
+        section = raw.get(section_name)
+        if isinstance(section, dict):
+            _apply_dict(dc_instance, section)
+
+    return config
 
 
 @dataclass
@@ -47,8 +109,11 @@ class ClassifierConfig:
 
     # --- Normalization caps ---
     detection_rate_cap: float = 0.40
-    ball_speed_cap: float = 8.0       # px/frame
+    ball_speed_cap: float = 8.0       # px/frame at reference resolution
     player_count_cap: float = 2.0
+    # Reference resolution for ball_speed_cap (speeds are scaled to this)
+    ball_speed_ref_width: int = 1920
+    ball_speed_ref_height: int = 1080
 
     # --- Temporal smoothing ---
     smooth_sigma: float = 12.5        # Gaussian sigma (frames)
@@ -113,3 +178,5 @@ class PipelineConfig:
     use_fp16: bool = True
     # Chunk size for processing (frames). 0 = auto-calculate from available RAM.
     chunk_frames: int = 0
+    # Whether to render an annotated output video (false = JSON report only)
+    render_video: bool = True

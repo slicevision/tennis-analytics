@@ -33,6 +33,21 @@ python src/pipeline.py --video data/videos/clip.mp4
 python src/pipeline.py --video data/videos/clip.mp4 --output data/output
 ```
 
+### Batch Processing
+
+To process all `.mp4` files in `01. Videos/` at once:
+
+```bash
+bash run_all.sh
+```
+
+This will:
+
+- Run the pipeline on every `.mp4` in `01. Videos/`
+- Write reports and annotated videos to `data/output/`
+- Save per-video logs to `data/logs/`
+- Print a summary with success/failure counts when finished
+
 ## Output
 
 - Annotated video with play/dead overlay

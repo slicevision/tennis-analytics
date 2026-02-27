@@ -43,12 +43,15 @@ class CourtDetector:
 
         # Set by detect()
         self.court_polygon: np.ndarray | None = None    # 4×2 raw sideline trapezoid
-        self.padded_polygon: np.ndarray | None = None   # 4×2 padded trapezoid
+        self.padded_polygon: np.ndarray | None = None   # padded polygon (4-8 pts)
         self.court_mask: np.ndarray | None = None       # H×W uint8 (255 inside)
 
         # Raw sideline data: (p_top, p_bot, vx, vy) per side
         self._left_sideline: tuple | None = None
         self._right_sideline: tuple | None = None
+
+        # Baseline cap (far-court horizontal line)
+        self._baseline_y: float | None = None
 
         self._frame_h: int = 0
         self._frame_w: int = 0
@@ -150,7 +153,18 @@ class CourtDetector:
               f"({right_top[0]:.0f},{right_top[1]:.0f}) → "
               f"({right_bot[0]:.0f},{right_bot[1]:.0f})")
 
-        # Step 5 — apply padding and build mask
+        # Step 5 — detect baseline cap (far-court horizontal line)
+        self._baseline_y = None
+        if self.cfg.baseline_cap_enabled:
+            self._baseline_y = self._detect_baseline(frame)
+            if self._baseline_y is not None:
+                print(f"  [CourtDetector] Baseline cap at y={self._baseline_y:.0f} "
+                      f"({self._baseline_y / h * 100:.0f}% from top)")
+            else:
+                print("  [CourtDetector] No baseline detected — "
+                      "using uncapped sidelines")
+
+        # Step 6 — apply padding and build mask
         self._rebuild_mask()
 
         # Validate area
@@ -161,7 +175,7 @@ class CourtDetector:
                   f"— skipping")
             self.court_mask = None
             return None
-        if frac > self.cfg.max_court_area_pct:
+        if frac > self.cfg.max_court_area_pct and self._baseline_y is None:
             print(f"  [CourtDetector] ROI too large ({frac*100:.1f}%) "
                   f"— skipping")
             self.court_mask = None
@@ -299,16 +313,84 @@ class CourtDetector:
             (p_bot[0] + nx * px_outward, p_bot[1]),
         )
 
+    def _detect_baseline(self, frame: np.ndarray) -> float | None:
+        """Detect the longest near-horizontal line in the upper frame.
+
+        This line typically corresponds to the far-court baseline.
+
+        Returns
+        -------
+        float | None
+            The y-coordinate of the baseline, or *None* if none found.
+        """
+        h, w = frame.shape[:2]
+        search_h = int(h * self.cfg.baseline_search_frac)
+        if search_h < 10:
+            return None
+
+        upper = frame[:search_h]
+        gray = cv2.cvtColor(upper, cv2.COLOR_BGR2GRAY)
+        blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+        edges = cv2.Canny(blurred, self.cfg.canny_low, self.cfg.canny_high)
+
+        raw = cv2.HoughLinesP(
+            edges, 1, np.pi / 180,
+            threshold=self.cfg.baseline_hough_threshold,
+            minLineLength=self.cfg.baseline_min_length,
+            maxLineGap=self.cfg.max_line_gap,
+        )
+        if raw is None:
+            return None
+
+        lines = raw.reshape(-1, 4).astype(np.float64)
+
+        # Keep only near-horizontal segments
+        angles = np.degrees(np.arctan2(
+            np.abs(lines[:, 3] - lines[:, 1]),
+            np.abs(lines[:, 2] - lines[:, 0]),
+        ))
+        horiz_mask = angles <= self.cfg.baseline_max_angle
+        horiz = lines[horiz_mask]
+
+        if len(horiz) == 0:
+            return None
+
+        # Pick the longest segment
+        lengths = np.sqrt(
+            (horiz[:, 2] - horiz[:, 0]) ** 2 +
+            (horiz[:, 3] - horiz[:, 1]) ** 2
+        )
+        longest_idx = int(np.argmax(lengths))
+        seg = horiz[longest_idx]
+
+        # Baseline y = average of the two endpoints
+        baseline_y = (seg[1] + seg[3]) / 2.0
+        return baseline_y
+
+    @staticmethod
+    def _x_at_y(
+        p_top: tuple[float, float],
+        p_bot: tuple[float, float],
+        y: float,
+    ) -> float:
+        """Linearly interpolate x at a given y between two points."""
+        dy = p_bot[1] - p_top[1]
+        if abs(dy) < 1e-9:
+            return (p_top[0] + p_bot[0]) / 2.0
+        t = (y - p_top[1]) / dy
+        return p_top[0] + t * (p_bot[0] - p_top[0])
+
     def _rebuild_mask(self) -> None:
         """(Re)compute ``padded_polygon`` and ``court_mask``.
 
-        Shifts each sideline outward by ``padding_px`` pixels
-        perpendicular to its direction, then fills the resulting
-        trapezoid as a binary mask.
+        If a baseline cap is active, the polygon is full-frame-width
+        above the baseline and narrows to the padded sidelines below it.
+        Otherwise falls back to the original padded trapezoid.
         """
         left_top, left_bot, lvx, lvy = self._left_sideline
         right_top, right_bot, rvx, rvy = self._right_sideline
         pad = self.cfg.padding_px
+        w, h = self._frame_w, self._frame_h
 
         # Shift left sideline outward (left = negative x direction)
         lp_top, lp_bot = self._shift_line(left_top, left_bot, lvx, lvy, -pad)
@@ -326,16 +408,39 @@ class CourtDetector:
                 right_top, right_bot, rvx, rvy, -pad,
             )
 
-        # Build padded trapezoid: TL, TR, BR, BL
-        self.padded_polygon = np.array([
-            [lp_top[0], lp_top[1]],
-            [rp_top[0], rp_top[1]],
-            [rp_bot[0], rp_bot[1]],
-            [lp_bot[0], lp_bot[1]],
-        ], dtype=np.float64)
+        if self._baseline_y is not None:
+            # --- Capped polygon ---
+            # Above baseline_y: full frame width.
+            # Below baseline_y: bounded by padded sidelines.
+            bl_y = max(0.0, self._baseline_y - self.cfg.baseline_pad_px)
 
-        # Fill trapezoid → binary mask
-        mask = np.zeros((self._frame_h, self._frame_w), dtype=np.uint8)
+            # Compute where padded sidelines are at baseline_y
+            left_x_at_bl = self._x_at_y(lp_top, lp_bot, bl_y)
+            right_x_at_bl = self._x_at_y(rp_top, rp_bot, bl_y)
+
+            # Build polygon: full width top → transition at baseline →
+            # padded sidelines to bottom
+            self.padded_polygon = np.array([
+                [0.0,             0.0],          # top-left
+                [float(w),        0.0],          # top-right
+                [float(w),        bl_y],         # right edge at baseline
+                [right_x_at_bl,   bl_y],         # right padded at baseline
+                [rp_bot[0],       rp_bot[1]],    # right padded at bottom
+                [lp_bot[0],       lp_bot[1]],    # left padded at bottom
+                [left_x_at_bl,    bl_y],         # left padded at baseline
+                [0.0,             bl_y],         # left edge at baseline
+            ], dtype=np.float64)
+        else:
+            # --- Original trapezoid (no baseline cap) ---
+            self.padded_polygon = np.array([
+                [lp_top[0], lp_top[1]],
+                [rp_top[0], rp_top[1]],
+                [rp_bot[0], rp_bot[1]],
+                [lp_bot[0], lp_bot[1]],
+            ], dtype=np.float64)
+
+        # Fill polygon → binary mask
+        mask = np.zeros((h, w), dtype=np.uint8)
         pts = self.padded_polygon.astype(np.int32).reshape((-1, 1, 2))
         cv2.fillPoly(mask, [pts], 255)
         self.court_mask = mask

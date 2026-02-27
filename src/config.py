@@ -91,6 +91,15 @@ class CourtDetectorConfig:
     max_court_area_pct: float = 0.95
     # Debug: draw padded boundary on output video
     debug_overlay: bool = False
+    # Baseline cap: use the longest horizontal line in the upper frame
+    # to prevent the converging padded sidelines from excluding the
+    # upper region.  Above the baseline, full frame width is valid.
+    baseline_cap_enabled: bool = True
+    baseline_search_frac: float = 0.55   # search top N fraction of frame
+    baseline_max_angle: float = 15.0     # max degrees from horizontal
+    baseline_min_length: int = 80        # min segment length (pixels)
+    baseline_hough_threshold: int = 40
+    baseline_pad_px: int = 50            # shift baseline upward (pixels)
 
 
 @dataclass

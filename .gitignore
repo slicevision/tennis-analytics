@@ -5,3 +5,5 @@ data/output/*
 data/videos/*
 PIPELINE_GUIDE.md
 yolo26s.pt
+01. Videos/*
+data/logs/*

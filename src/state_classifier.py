@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.ndimage import uniform_filter1d, gaussian_filter1d
 
-from config import ClassifierConfig
+from .config import ClassifierConfig
 
 
 class StateClassifier:

@@ -85,7 +85,7 @@ class TrackNetConfig:
 @dataclass
 class YOLOConfig:
     """YOLO player detection settings."""
-    model_path: str = "yolo26s.pt"
+    model_path: str = "weights/yolo26s.pt"
     batch_size: int = 32
     imgsz: int = 640
     conf_threshold: float = 0.45

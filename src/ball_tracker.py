@@ -1,17 +1,21 @@
 import gc
-import sys
 import os
+import sys
 import time
-import numpy as np
+
 import cv2
+import numpy as np
 import torch
 
-# Resolve TrackNet model import
+# Ensure the tracknet package directory is importable
 _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(_PROJECT_ROOT, "tracknet"))
+_TRACKNET_DIR = os.path.join(_PROJECT_ROOT, "tracknet")
+if _TRACKNET_DIR not in sys.path:
+    sys.path.insert(0, _TRACKNET_DIR)
+
 from model import BallTrackerNet  # noqa: E402
 
-from config import TrackNetConfig  # noqa: E402
+from .config import TrackNetConfig
 
 
 class BallTracker:

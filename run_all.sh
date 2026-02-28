@@ -34,7 +34,7 @@ for VIDEO in "$VIDEO_DIR"/*.mp4; do
     echo " Log: $LOGFILE"
     echo "------------------------------------------"
 
-    if python src/pipeline.py --video "$VIDEO" --output "$OUTPUT_DIR" 2>&1 | tee "$LOGFILE"; then
+    if python -m src.pipeline --video "$VIDEO" --output "$OUTPUT_DIR" 2>&1 | tee "$LOGFILE"; then
         echo " ✓ Done: $BASENAME"
     else
         echo " ✗ FAILED: $BASENAME (exit $?)"

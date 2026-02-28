@@ -12,7 +12,7 @@ tracknet:
   outlier_max_dist: 100.0       # max px jump between frames before removal
 
 yolo:
-  model_path: "yolo26s.pt"
+  model_path: "weights/yolo26s.pt"
   batch_size: 32
   conf_threshold: 0.45          # detection confidence cutoff
   bbox_expand_h: 0.60           # horizontal bbox expansion for ball gate
@@ -58,6 +58,6 @@ court:
   debug_overlay: false           # draw court boundary on output video
 
 # ── Pipeline ──────────────────────────────────────────────────────
-render_video: true               # false = JSON report only (skip video rendering)
+render_video: false               # false = JSON report only (skip video rendering)
 device: "cuda"                   # "cuda" or "cpu"
 chunk_frames: 0                  # 0 = auto-calculate from available RAM

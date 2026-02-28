@@ -1,8 +1,12 @@
+import os
 import time
+
 import numpy as np
 from ultralytics import YOLO
 
-from config import YOLOConfig
+from .config import YOLOConfig
+
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 class PlayerDetector:
@@ -11,7 +15,8 @@ class PlayerDetector:
     def __init__(self, config: YOLOConfig, device: str = "cuda"):
         self.cfg = config
         self.device = device
-        self.model = YOLO(self.cfg.model_path)
+        model_path = os.path.join(_PROJECT_ROOT, self.cfg.model_path)
+        self.model = YOLO(model_path)
 
     # ------------------------------------------------------------------
     # Public API

@@ -29,8 +29,8 @@ gdown "https://drive.google.com/uc?id=1umprNPYM-yZ2SyBDRpwihW89omv2MWfr" -O data
 Place input videos in `data/videos/`, then run:
 
 ```bash
-python src/pipeline.py --video data/videos/clip.mp4
-python src/pipeline.py --video data/videos/clip.mp4 --output data/output
+python -m src.pipeline --video data/videos/clip.mp4
+python -m src.pipeline --video data/videos/clip.mp4 --output data/output
 ```
 
 ### Batch Processing

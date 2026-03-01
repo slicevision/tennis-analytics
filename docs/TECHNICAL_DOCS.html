@@ -1,0 +1,2250 @@
+<!DOCTYPE html><html><head>
+      <title>TECHNICAL_DOCS</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////home/nitish/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.8.20/crossnote/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="technical-documentation--tennis-playdead-time-detection-pipeline">Technical Documentation — Tennis Play/Dead Time Detection Pipeline </h1>
+<blockquote>
+<p><strong>Repository:</strong> <code>rlxai/tennis-analytics-phase-1</code><br>
+<strong>Branch:</strong> <code>master</code><br>
+<strong>Last updated:</strong> March 2026</p>
+</blockquote>
+<hr>
+<h2 id="table-of-contents">Table of Contents </h2>
+<ul>
+<li><a href="#technical-documentation--tennis-playdead-time-detection-pipeline">Technical Documentation — Tennis Play/Dead Time Detection Pipeline</a>
+<ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#1-project-overview">1. Project Overview</a></li>
+<li><a href="#2-architecture">2. Architecture</a></li>
+<li><a href="#3-directory-structure">3. Directory Structure</a></li>
+<li><a href="#4-installation--prerequisites">4. Installation &amp; Prerequisites</a>
+<ul>
+<li><a href="#system-requirements">System Requirements</a></li>
+<li><a href="#installation-steps">Installation Steps</a></li>
+<li><a href="#model-weights">Model Weights</a></li>
+<li><a href="#python-dependencies">Python Dependencies</a></li>
+</ul>
+</li>
+<li><a href="#5-configuration-reference">5. Configuration Reference</a>
+<ul>
+<li><a href="#top-level-settings">Top-level Settings</a></li>
+<li><a href="#tracknet--ball-detection"><code>tracknet</code> — Ball Detection</a></li>
+<li><a href="#yolo--player-detection"><code>yolo</code> — Player Detection</a></li>
+<li><a href="#classifier--state-classification"><code>classifier</code> — State Classification</a></li>
+<li><a href="#court--court-region-detection"><code>court</code> — Court Region Detection</a></li>
+</ul>
+</li>
+<li><a href="#6-pipeline-phases">6. Pipeline Phases</a>
+<ul>
+<li><a href="#61-phase-1--video-probing">6.1 Phase 1 — Video Probing</a></li>
+<li><a href="#62-phase-1b--court-region-detection">6.2 Phase 1b — Court Region Detection</a></li>
+<li><a href="#63-phase-2--chunked-detection-ball--player">6.3 Phase 2 — Chunked Detection (Ball &amp; Player)</a></li>
+<li><a href="#64-phase-3--state-classification">6.4 Phase 3 — State Classification</a></li>
+<li><a href="#65-phase-4--output-generation">6.5 Phase 4 — Output Generation</a></li>
+</ul>
+</li>
+<li><a href="#7-module-reference">7. Module Reference</a>
+<ul>
+<li><a href="#71-configpy">7.1 <code>config.py</code></a></li>
+<li><a href="#72-pipelinepy">7.2 <code>pipeline.py</code></a></li>
+<li><a href="#73-ball_trackerpy">7.3 <code>ball_tracker.py</code></a></li>
+<li><a href="#74-player_detectorpy">7.4 <code>player_detector.py</code></a></li>
+<li><a href="#75-court_detectorpy">7.5 <code>court_detector.py</code></a></li>
+<li><a href="#76-state_classifierpy">7.6 <code>state_classifier.py</code></a></li>
+<li><a href="#77-rendererpy">7.7 <code>renderer.py</code></a></li>
+<li><a href="#78-io_utilspy">7.8 <code>io_utils.py</code></a></li>
+</ul>
+</li>
+<li><a href="#8-classification-algorithm-deep-dive">8. Classification Algorithm Deep Dive</a>
+<ul>
+<li><a href="#step-1--per-frame-raw-signals">Step 1 — Per-frame Raw Signals</a></li>
+<li><a href="#step-2--windowed-feature-smoothing">Step 2 — Windowed Feature Smoothing</a></li>
+<li><a href="#step-3--normalised-weighted-play-score">Step 3 — Normalised Weighted Play Score</a></li>
+<li><a href="#step-4--gaussian-temporal-smoothing">Step 4 — Gaussian Temporal Smoothing</a></li>
+<li><a href="#step-5--hysteresis-thresholding">Step 5 — Hysteresis Thresholding</a></li>
+<li><a href="#step-6--ball-in-bbox-gate">Step 6 — Ball-in-Bbox Gate</a></li>
+<li><a href="#step-7--minimum-duration-filter">Step 7 — Minimum Duration Filter</a></li>
+<li><a href="#step-8--isolated-play-filter">Step 8 — Isolated Play Filter</a></li>
+</ul>
+</li>
+<li><a href="#9-court-detection-algorithm">9. Court Detection Algorithm</a>
+<ul>
+<li><a href="#algorithm-steps">Algorithm Steps</a></li>
+<li><a href="#filtering-behaviour">Filtering Behaviour</a></li>
+</ul>
+</li>
+<li><a href="#10-memory-management--chunking">10. Memory Management &amp; Chunking</a>
+<ul>
+<li><a href="#auto-chunk-sizing">Auto-Chunk Sizing</a></li>
+<li><a href="#per-chunk-cleanup">Per-Chunk Cleanup</a></li>
+<li><a href="#tracknet-overlap">TrackNet Overlap</a></li>
+</ul>
+</li>
+<li><a href="#11-system-benchmarking--hardware-requirements">11. System Benchmarking &amp; Hardware Requirements</a>
+<ul>
+<li><a href="#concurrent-model-resource-profile">Concurrent Model Resource Profile</a></li>
+<li><a href="#gpu-vram-breakdown-peak-during-phase-2">GPU VRAM Breakdown (Peak, During Phase 2)</a></li>
+<li><a href="#system-ram-breakdown-peak-1080p">System RAM Breakdown (Peak, 1080p)</a></li>
+<li><a href="#cpu-usage-profile">CPU Usage Profile</a></li>
+<li><a href="#known-memory-safety-caveats">Known Memory Safety Caveats</a></li>
+<li><a href="#recommended-system-configurations">Recommended System Configurations</a></li>
+<li><a href="#config-knobs-to-tune-if-hitting-oom">Config Knobs to Tune if Hitting OOM</a></li>
+</ul>
+</li>
+<li><a href="#12-cli-reference">12. CLI Reference</a></li>
+<li><a href="#13-batch-processing">13. Batch Processing</a></li>
+<li><a href="#14-output-formats">14. Output Formats</a>
+<ul>
+<li><a href="#annotated-video-_analysismp4">Annotated Video (<code>*_analysis.mp4</code>)</a></li>
+<li><a href="#json-report-_reportjson">JSON Report (<code>*_report.json</code>)</a></li>
+</ul>
+</li>
+<li><a href="#15-performance-considerations">15. Performance Considerations</a>
+<ul>
+<li><a href="#gpu-utilisation">GPU Utilisation</a></li>
+<li><a href="#throughput-estimates">Throughput Estimates</a></li>
+<li><a href="#bottlenecks">Bottlenecks</a></li>
+<li><a href="#tips-for-large-videos">Tips for Large Videos</a></li>
+</ul>
+</li>
+<li><a href="#16-extending-the-pipeline">16. Extending the Pipeline</a>
+<ul>
+<li><a href="#adding-a-new-detection-module">Adding a New Detection Module</a></li>
+<li><a href="#modifying-the-classification-logic">Modifying the Classification Logic</a></li>
+<li><a href="#custom-video-overlays">Custom Video Overlays</a></li>
+<li><a href="#supporting-non-linux-systems">Supporting Non-Linux Systems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="1-project-overview">1. Project Overview </h2>
+<p>This project provides an end-to-end computer vision pipeline that automatically classifies every frame of a tennis broadcast video as either <strong>play</strong> (active rally) or <strong>dead time</strong> (between points, changeovers, replays, etc.).</p>
+<p>The system combines three neural-network-based perception modules with a multi-signal temporal classifier:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Model</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ball Tracker</strong></td>
+<td>TrackNet (CNN)</td>
+<td>Detects the tennis ball position per frame</td>
+</tr>
+<tr>
+<td><strong>Player Detector</strong></td>
+<td>YOLOv8/YOLO26s</td>
+<td>Detects and localises players on court</td>
+</tr>
+<tr>
+<td><strong>Court Detector</strong></td>
+<td>Classical CV (Hough + Canny)</td>
+<td>Identifies the court region for ROI filtering</td>
+</tr>
+<tr>
+<td><strong>State Classifier</strong></td>
+<td>Signal processing (no ML)</td>
+<td>Fuses signals into a play/dead classification</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key capabilities:</strong></p>
+<ul>
+<li>GPU-accelerated batched inference (CUDA, with FP16 mixed precision)</li>
+<li>Automatic memory-aware chunking for processing long videos on constrained hardware</li>
+<li>Configurable hysteresis-based state machine with temporal smoothing</li>
+<li>Ball-in-bounding-box gate to suppress false play transitions</li>
+<li>Isolated play segment filtering for noise reduction</li>
+<li>H.264 annotated video output via FFmpeg pipe (single-pass encoding)</li>
+<li>Machine-readable JSON reports with frame-level and segment-level data</li>
+<li>Batch processing of multiple videos with logging</li>
+</ul>
+<hr>
+<h2 id="2-architecture">2. Architecture </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>┌──────────────────────────────────────────────────────────────────┐
+│                         Pipeline Entry                            │
+│                        (pipeline.py)                              │
+│                                                                   │
+│  ┌─────────┐   ┌──────────────┐   ┌───────────────┐              │
+│  │ Phase 1  │   │  Phase 1b    │   │   Phase 2     │              │
+│  │ Probe    │──▶│ Court Detect │──▶│ Chunked Loop  │              │
+│  │ Video    │   │ (1st frame)  │   │               │              │
+│  └─────────┘   └──────────────┘   │ ┌───────────┐ │              │
+│                                    │ │ BallTracker│ │              │
+│                                    │ │ (TrackNet) │ │              │
+│                                    │ └───────────┘ │              │
+│                                    │ ┌───────────┐ │              │
+│                                    │ │PlayerDetect│ │              │
+│                                    │ │  (YOLO)    │ │              │
+│                                    │ └───────────┘ │              │
+│                                    │ ┌───────────┐ │              │
+│                                    │ │Court Filter│ │              │
+│                                    │ │  (ROI mask)│ │              │
+│                                    │ └───────────┘ │              │
+│                                    └───────┬───────┘              │
+│                                            │                      │
+│                                            ▼                      │
+│                                    ┌───────────────┐              │
+│                                    │   Phase 3     │              │
+│                                    │ Classifier    │              │
+│                                    │ (hysteresis + │              │
+│                                    │  smoothing)   │              │
+│                                    └───────┬───────┘              │
+│                                            │                      │
+│                                            ▼                      │
+│                                    ┌───────────────┐              │
+│                                    │   Phase 4     │              │
+│                                    │ Output Gen    │              │
+│                                    │ (video+JSON)  │              │
+│                                    └───────────────┘              │
+└──────────────────────────────────────────────────────────────────┘
+</code></pre><p><strong>Data flow (per chunk):</strong></p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>Raw video frames
+      │
+      ├──▶ BallTracker.detect()    ──▶ ball_positions[]
+      │                                      │
+      ├──▶ PlayerDetector.detect() ──▶ player_data[]
+      │                                      │
+      │         ┌────────────────────────────┘
+      │         ▼
+      │    CourtDetector.filter_*()  ──▶ filtered positions &amp; boxes
+      │                                      │
+      │                                      ▼
+      │                            StateClassifier.classify()
+      │                                      │
+      │                                      ▼
+      │                            states[], play_scores[],
+      │                            segments[], summary{}
+      │                                      │
+      │         ┌────────────────────────────┘
+      │         ├──▶ render_output_video()  ──▶ annotated .mp4
+      │         └──▶ write_json_report()    ──▶ .json report
+</code></pre><blockquote>
+<p><strong>Note:</strong> Ball and player detection run sequentially (not in parallel).<br>
+Court filtering takes detection outputs as input, not raw frames.</p>
+</blockquote>
+<hr>
+<h2 id="3-directory-structure">3. Directory Structure </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>tennis-analytics-phase-1/
+├── config/
+│   └── config.yaml            # User-editable configuration overrides
+├── data/
+│   ├── videos/                # Input videos (user-provided)
+│   ├── output/                # Pipeline outputs (videos + JSON reports)
+│   └── logs/                  # Per-video batch processing logs
+├── src/
+│   ├── __init__.py            # Package marker
+│   ├── __main__.py            # Enables `python -m src` invocation
+│   ├── ball_tracker.py        # TrackNet ball detection module
+│   ├── config.py              # Dataclass configs + YAML loader
+│   ├── court_detector.py      # Sideline-based court ROI detection
+│   ├── io_utils.py            # Video I/O, JSON reports, system helpers
+│   ├── pipeline.py            # Main pipeline orchestrator + CLI
+│   ├── player_detector.py     # YOLO player detection module
+│   ├── renderer.py            # Annotated video rendering
+│   └── state_classifier.py    # Play/dead state classification engine
+├── tracknet/                  # Git submodule → TrackNet model code + weights
+├── requirements.txt           # Python dependencies
+├── run_all.sh                 # Batch processing script
+└── README.md                  # Quick-start guide
+</code></pre><hr>
+<h2 id="4-installation--prerequisites">4. Installation &amp; Prerequisites </h2>
+<h3 id="system-requirements">System Requirements </h3>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OS</strong></td>
+<td>Linux (tested on Ubuntu; uses <code>/proc/meminfo</code> for RAM detection)</td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td>3.10+ (uses <code>type[T]</code> syntax and <code>list[T]</code> generics)</td>
+</tr>
+<tr>
+<td><strong>GPU</strong></td>
+<td>NVIDIA GPU with CUDA support (strongly recommended)</td>
+</tr>
+<tr>
+<td><strong>FFmpeg</strong></td>
+<td>Required for H.264 output encoding; falls back to <code>mp4v</code> if unavailable</td>
+</tr>
+<tr>
+<td><strong>RAM</strong></td>
+<td>Proportional to video resolution; auto-chunking allocates ~40% of available</td>
+</tr>
+</tbody>
+</table>
+<h3 id="installation-steps">Installation Steps </h3>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token comment"># Clone with submodules (TrackNet model code)</span>
+<span class="token function">git</span> clone --recurse-submodules https://github.com/rlxai/tennis-analytics-phase-1.git
+<span class="token builtin class-name">cd</span> tennis-analytics-phase-1
+
+<span class="token comment"># Create and activate virtual environment</span>
+python3 <span class="token parameter variable">-m</span> venv venv
+<span class="token builtin class-name">source</span> venv/bin/activate
+
+<span class="token comment"># Install dependencies</span>
+pip <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt
+pip <span class="token function">install</span> <span class="token parameter variable">-r</span> tracknet/requirements.txt
+
+<span class="token comment"># System dependency</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> ffmpeg
+</code></pre><h3 id="model-weights">Model Weights </h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Source</th>
+<th>Destination</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TrackNet</td>
+<td>Bundled via submodule</td>
+<td><code>tracknet/weights/model_best.pt</code></td>
+</tr>
+<tr>
+<td>YOLO26s</td>
+<td><a href="https://drive.google.com/drive/folders/1V4KW6x1rKWAM_7HMYizFqRX92vCxSyt-">Google Drive</a></td>
+<td><code>weights/yolo26s.pt</code> (project root)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="python-dependencies">Python Dependencies </h3>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Min Version</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>torch</code></td>
+<td>2.0</td>
+<td>Neural network inference engine</td>
+</tr>
+<tr>
+<td><code>torchvision</code></td>
+<td>—</td>
+<td>Vision utilities</td>
+</tr>
+<tr>
+<td><code>ultralytics</code></td>
+<td>8.0</td>
+<td>YOLO model loading and inference</td>
+</tr>
+<tr>
+<td><code>opencv-python-headless</code></td>
+<td>4.8</td>
+<td>Video I/O, image processing</td>
+</tr>
+<tr>
+<td><code>numpy</code></td>
+<td>1.24</td>
+<td>Numerical operations</td>
+</tr>
+<tr>
+<td><code>scipy</code></td>
+<td>1.10</td>
+<td>Gaussian filtering for temporal smoothing</td>
+</tr>
+<tr>
+<td><code>PyYAML</code></td>
+<td>6.0</td>
+<td>Configuration file parsing</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-configuration-reference">5. Configuration Reference </h2>
+<p>Configuration is managed through a hierarchy of dataclasses in <code>src/config.py</code>. Default values are built into the code; any key set in <code>config/config.yaml</code> overrides the corresponding default.</p>
+<h3 id="top-level-settings">Top-level Settings </h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>device</code></td>
+<td><code>str</code></td>
+<td><code>"cuda"</code></td>
+<td>Compute device (<code>"cuda"</code> or <code>"cpu"</code>). <strong>Note:</strong> Currently unused at runtime — the pipeline auto-selects based on <code>torch.cuda.is_available()</code>.</td>
+</tr>
+<tr>
+<td><code>use_fp16</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td>Enable FP16 mixed-precision inference. <strong>Note:</strong> Currently unused — FP16 is unconditionally enabled in both TrackNet (<code>torch.amp.autocast</code>) and YOLO (<code>half=True</code>). Reserved for future use.</td>
+</tr>
+<tr>
+<td><code>chunk_frames</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>Frames per processing chunk (<code>0</code> = auto-calculate from RAM)</td>
+</tr>
+<tr>
+<td><code>render_video</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td>Generate annotated output video (<code>false</code> = JSON only)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tracknet--ball-detection"><code>tracknet</code> — Ball Detection </h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model_path</code></td>
+<td><code>str</code></td>
+<td><code>"tracknet/weights/model_best.pt"</code></td>
+<td>Path to TrackNet weights</td>
+</tr>
+<tr>
+<td><code>input_width</code></td>
+<td><code>int</code></td>
+<td><code>640</code></td>
+<td>Model input width (pixels)</td>
+</tr>
+<tr>
+<td><code>input_height</code></td>
+<td><code>int</code></td>
+<td><code>360</code></td>
+<td>Model input height (pixels)</td>
+</tr>
+<tr>
+<td><code>batch_size</code></td>
+<td><code>int</code></td>
+<td><code>16</code></td>
+<td>Frames per GPU batch</td>
+</tr>
+<tr>
+<td><code>heatmap_threshold</code></td>
+<td><code>int</code></td>
+<td><code>127</code></td>
+<td>Binary threshold on heatmap</td>
+</tr>
+<tr>
+<td><code>hough_dp</code></td>
+<td><code>int</code></td>
+<td><code>1</code></td>
+<td>HoughCircles inverse resolution ratio</td>
+</tr>
+<tr>
+<td><code>hough_min_dist</code></td>
+<td><code>int</code></td>
+<td><code>1</code></td>
+<td>Minimum distance between circle centres</td>
+</tr>
+<tr>
+<td><code>hough_param1</code></td>
+<td><code>int</code></td>
+<td><code>50</code></td>
+<td>Canny upper threshold for HoughCircles</td>
+</tr>
+<tr>
+<td><code>hough_param2</code></td>
+<td><code>int</code></td>
+<td><code>2</code></td>
+<td>Accumulator threshold for circle detection</td>
+</tr>
+<tr>
+<td><code>hough_min_radius</code></td>
+<td><code>int</code></td>
+<td><code>2</code></td>
+<td>Minimum detected circle radius</td>
+</tr>
+<tr>
+<td><code>hough_max_radius</code></td>
+<td><code>int</code></td>
+<td><code>7</code></td>
+<td>Maximum detected circle radius</td>
+</tr>
+<tr>
+<td><code>outlier_max_dist</code></td>
+<td><code>float</code></td>
+<td><code>100.0</code></td>
+<td>Max pixel jump between frames before outlier removal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="yolo--player-detection"><code>yolo</code> — Player Detection </h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model_path</code></td>
+<td><code>str</code></td>
+<td><code>"weights/yolo26s.pt"</code></td>
+<td>Path to YOLO weights</td>
+</tr>
+<tr>
+<td><code>batch_size</code></td>
+<td><code>int</code></td>
+<td><code>32</code></td>
+<td>Frames per GPU batch</td>
+</tr>
+<tr>
+<td><code>imgsz</code></td>
+<td><code>int</code></td>
+<td><code>640</code></td>
+<td>YOLO input image size</td>
+</tr>
+<tr>
+<td><code>conf_threshold</code></td>
+<td><code>float</code></td>
+<td><code>0.45</code></td>
+<td>Detection confidence cutoff</td>
+</tr>
+<tr>
+<td><code>person_class_id</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>COCO class index for person</td>
+</tr>
+<tr>
+<td><code>max_det</code></td>
+<td><code>int</code></td>
+<td><code>10</code></td>
+<td>Maximum detections per frame</td>
+</tr>
+<tr>
+<td><code>bbox_expand_h</code></td>
+<td><code>float</code></td>
+<td><code>0.60</code></td>
+<td>Horizontal bbox expansion ratio for ball gate</td>
+</tr>
+<tr>
+<td><code>bbox_expand_v</code></td>
+<td><code>float</code></td>
+<td><code>0.30</code></td>
+<td>Vertical bbox expansion ratio for ball gate</td>
+</tr>
+</tbody>
+</table>
+<h3 id="classifier--state-classification"><code>classifier</code> — State Classification </h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>window_size</code></td>
+<td><code>int</code></td>
+<td><code>25</code></td>
+<td>Rolling window size (frames) for feature smoothing</td>
+</tr>
+<tr>
+<td><code>weight_detection_rate</code></td>
+<td><code>float</code></td>
+<td><code>0.45</code></td>
+<td>Play score weight for ball detection rate</td>
+</tr>
+<tr>
+<td><code>weight_ball_speed</code></td>
+<td><code>float</code></td>
+<td><code>0.35</code></td>
+<td>Play score weight for ball speed</td>
+</tr>
+<tr>
+<td><code>weight_player_count</code></td>
+<td><code>float</code></td>
+<td><code>0.20</code></td>
+<td>Play score weight for player count</td>
+</tr>
+<tr>
+<td><code>detection_rate_cap</code></td>
+<td><code>float</code></td>
+<td><code>0.40</code></td>
+<td>Normalisation cap for detection rate</td>
+</tr>
+<tr>
+<td><code>ball_speed_cap</code></td>
+<td><code>float</code></td>
+<td><code>8.0</code></td>
+<td>Normalisation cap (px/frame at 1080p reference)</td>
+</tr>
+<tr>
+<td><code>player_count_cap</code></td>
+<td><code>float</code></td>
+<td><code>2.0</code></td>
+<td>Normalisation cap for player count</td>
+</tr>
+<tr>
+<td><code>ball_speed_ref_width</code></td>
+<td><code>int</code></td>
+<td><code>1920</code></td>
+<td>Reference width for speed normalisation</td>
+</tr>
+<tr>
+<td><code>ball_speed_ref_height</code></td>
+<td><code>int</code></td>
+<td><code>1080</code></td>
+<td>Reference height for speed normalisation</td>
+</tr>
+<tr>
+<td><code>smooth_sigma</code></td>
+<td><code>float</code></td>
+<td><code>12.5</code></td>
+<td>Gaussian sigma (frames) for temporal smoothing</td>
+</tr>
+<tr>
+<td><code>enter_play_threshold</code></td>
+<td><code>float</code></td>
+<td><code>0.55</code></td>
+<td>Hysteresis upper threshold (dead → play)</td>
+</tr>
+<tr>
+<td><code>exit_play_threshold</code></td>
+<td><code>float</code></td>
+<td><code>0.35</code></td>
+<td>Hysteresis lower threshold (play → dead)</td>
+</tr>
+<tr>
+<td><code>use_bbox_gate</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td>Enable ball-in-bbox gate</td>
+</tr>
+<tr>
+<td><code>bbox_gate_lookback</code></td>
+<td><code>int</code></td>
+<td><code>13</code></td>
+<td>Lookback window for bbox gate (frames)</td>
+</tr>
+<tr>
+<td><code>bbox_gate_ratio</code></td>
+<td><code>float</code></td>
+<td><code>0.5</code></td>
+<td>Suppression ratio for bbox gate</td>
+</tr>
+<tr>
+<td><code>min_play_duration</code></td>
+<td><code>float</code></td>
+<td><code>1.5</code></td>
+<td>Minimum play segment duration (seconds)</td>
+</tr>
+<tr>
+<td><code>min_dead_duration</code></td>
+<td><code>float</code></td>
+<td><code>2.0</code></td>
+<td>Minimum dead segment duration (seconds)</td>
+</tr>
+<tr>
+<td><code>use_isolated_play_filter</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td>Enable isolated play segment removal</td>
+</tr>
+<tr>
+<td><code>isolated_max_play</code></td>
+<td><code>float</code></td>
+<td><code>3.0</code></td>
+<td>Max play duration targeted by filter (seconds)</td>
+</tr>
+<tr>
+<td><code>isolated_dead_ratio</code></td>
+<td><code>float</code></td>
+<td><code>2.5</code></td>
+<td>Play-to-surrounding-dead ratio for removal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="court--court-region-detection"><code>court</code> — Court Region Detection </h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td>Enable court detection</td>
+</tr>
+<tr>
+<td><code>padding_px</code></td>
+<td><code>int</code></td>
+<td><code>350</code></td>
+<td>Perpendicular padding from sidelines (pixels)</td>
+</tr>
+<tr>
+<td><code>steep_min_angle</code></td>
+<td><code>float</code></td>
+<td><code>20.0</code></td>
+<td>Minimum angle from horizontal for sideline candidates</td>
+</tr>
+<tr>
+<td><code>hough_threshold</code></td>
+<td><code>int</code></td>
+<td><code>50</code></td>
+<td>HoughLinesP accumulator threshold</td>
+</tr>
+<tr>
+<td><code>min_line_length</code></td>
+<td><code>int</code></td>
+<td><code>150</code></td>
+<td>Minimum line segment length (pixels)</td>
+</tr>
+<tr>
+<td><code>max_line_gap</code></td>
+<td><code>int</code></td>
+<td><code>15</code></td>
+<td>Maximum gap for segment merging</td>
+</tr>
+<tr>
+<td><code>canny_low</code></td>
+<td><code>int</code></td>
+<td><code>30</code></td>
+<td>Canny lower hysteresis threshold</td>
+</tr>
+<tr>
+<td><code>canny_high</code></td>
+<td><code>int</code></td>
+<td><code>100</code></td>
+<td>Canny upper hysteresis threshold</td>
+</tr>
+<tr>
+<td><code>min_court_area_pct</code></td>
+<td><code>float</code></td>
+<td><code>0.05</code></td>
+<td>Minimum valid ROI as fraction of frame area</td>
+</tr>
+<tr>
+<td><code>max_court_area_pct</code></td>
+<td><code>float</code></td>
+<td><code>0.95</code></td>
+<td>Maximum valid ROI as fraction of frame area</td>
+</tr>
+<tr>
+<td><code>debug_overlay</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>Draw padded court boundary on output video</td>
+</tr>
+<tr>
+<td><code>baseline_cap_enabled</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td>Enable far-court baseline cap</td>
+</tr>
+<tr>
+<td><code>baseline_search_frac</code></td>
+<td><code>float</code></td>
+<td><code>0.55</code></td>
+<td>Search top fraction of frame for baseline</td>
+</tr>
+<tr>
+<td><code>baseline_max_angle</code></td>
+<td><code>float</code></td>
+<td><code>15.0</code></td>
+<td>Max degrees from horizontal for baseline</td>
+</tr>
+<tr>
+<td><code>baseline_min_length</code></td>
+<td><code>int</code></td>
+<td><code>80</code></td>
+<td>Minimum baseline segment length</td>
+</tr>
+<tr>
+<td><code>baseline_hough_threshold</code></td>
+<td><code>int</code></td>
+<td><code>40</code></td>
+<td>Hough threshold for baseline detection</td>
+</tr>
+<tr>
+<td><code>baseline_pad_px</code></td>
+<td><code>int</code></td>
+<td><code>50</code></td>
+<td>Shift baseline upward (pixels)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="6-pipeline-phases">6. Pipeline Phases </h2>
+<h3 id="61-phase-1--video-probing">6.1 Phase 1 — Video Probing </h3>
+<p><strong>Module:</strong> <code>io_utils.probe_video()</code></p>
+<p>Reads video metadata (FPS, resolution, frame count) via OpenCV without decoding frames. Calculates estimated memory footprint and duration. If <code>chunk_frames</code> is set to <code>0</code>, the auto-chunking algorithm determines the optimal chunk size based on available system RAM (targeting ~40% of <code>MemAvailable</code>).</p>
+<h3 id="62-phase-1b--court-region-detection">6.2 Phase 1b — Court Region Detection </h3>
+<p><strong>Module:</strong> <code>CourtDetector.detect()</code></p>
+<p>Runs once on the first decoded frame. Uses classical computer vision (Canny edge detection → Hough line detection) to identify the two court sidelines. Constructs a padded binary mask defining the valid court region. All subsequent ball and player detections are filtered against this mask to remove off-court noise (e.g., spectators, ball boys, broadcast graphics).</p>
+<p>If detection fails, the pipeline falls back to full-frame processing with no ROI filtering.</p>
+<h3 id="63-phase-2--chunked-detection-ball--player">6.3 Phase 2 — Chunked Detection (Ball &amp; Player) </h3>
+<p><strong>Modules:</strong> <code>BallTracker.detect()</code>, <code>PlayerDetector.detect()</code></p>
+<p>The video is processed in memory-sized chunks. For each chunk:</p>
+<ol>
+<li><strong>Decode</strong> — Sequential frame reading from the video file (no seeking between chunks for efficiency).</li>
+<li><strong>Ball detection</strong> — TrackNet inference using 3-frame sliding windows with batched GPU forward passes. A 2-frame overlap is maintained between chunks so the sliding window is contiguous.</li>
+<li><strong>Player detection</strong> — YOLO batched inference on the same frames, producing bounding boxes, centres, and confidence scores.</li>
+<li><strong>Court filtering</strong> — Off-court detections are suppressed using the mask from Phase 1b.</li>
+<li><strong>Cleanup</strong> — Chunk memory is released, GPU cache is emptied, and <code>malloc_trim()</code> is called to return memory to the OS.</li>
+</ol>
+<h3 id="64-phase-3--state-classification">6.4 Phase 3 — State Classification </h3>
+<p><strong>Module:</strong> <code>StateClassifier.classify()</code></p>
+<p>Converts raw per-frame detections into a binary play/dead classification using a multi-stage signal processing pipeline:</p>
+<ol>
+<li><strong>Feature extraction</strong> — Ball detection rate, ball speed, and player count per frame.</li>
+<li><strong>Windowed smoothing</strong> — Uniform (box) filter over a rolling window.</li>
+<li><strong>Weighted scoring</strong> — Normalised and capped signals are combined into a composite play score in [0, 1].</li>
+<li><strong>Gaussian smoothing</strong> — Temporal Gaussian filter reduces frame-to-frame noise.</li>
+<li><strong>Hysteresis thresholding</strong> — Dual-threshold state machine prevents rapid oscillation:
+<ul>
+<li>Dead → Play requires score ≥ <code>enter_play_threshold</code> (0.55)</li>
+<li>Play → Dead requires score &lt; <code>exit_play_threshold</code> (0.35)</li>
+</ul>
+</li>
+<li><strong>Ball-in-bbox gate</strong> — Suppresses false play transitions caused by the ball being carried/held by a player (e.g., between points).</li>
+<li><strong>Minimum duration filter</strong> — Segments shorter than the configured minimum are merged into the surrounding state.</li>
+<li><strong>Isolated play filter</strong> — Short play segments surrounded by disproportionately long dead time are reclassified as dead.</li>
+</ol>
+<h3 id="65-phase-4--output-generation">6.5 Phase 4 — Output Generation </h3>
+<p><strong>Modules:</strong> <code>renderer.render_output_video()</code>, <code>io_utils.write_json_report()</code></p>
+<p>Two outputs are produced:</p>
+<ul>
+<li><strong>Annotated video</strong> (optional, controlled by <code>render_video</code>) — Re-reads the source video and overlays a colour-coded header bar, ball markers, player bounding boxes, play score, timestamp, and a full-video timeline bar. Encoding uses FFmpeg via stdin pipe for single-pass H.264 output; falls back to OpenCV <code>mp4v</code> codec if FFmpeg is unavailable.</li>
+<li><strong>JSON report</strong> — Machine-readable file containing video metadata, classification summary, and per-segment timing data.</li>
+</ul>
+<hr>
+<h2 id="7-module-reference">7. Module Reference </h2>
+<h3 id="71-configpy">7.1 <code>config.py</code> </h3>
+<p><strong>Purpose:</strong> Centralised configuration management using Python dataclasses.</p>
+<p><strong>Key types:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PipelineConfig</code></td>
+<td>Top-level container; aggregates all sub-configs</td>
+</tr>
+<tr>
+<td><code>TrackNetConfig</code></td>
+<td>Ball detection parameters (model path, batch size, Hough params)</td>
+</tr>
+<tr>
+<td><code>YOLOConfig</code></td>
+<td>Player detection parameters (model path, confidence, bbox expansion)</td>
+</tr>
+<tr>
+<td><code>ClassifierConfig</code></td>
+<td>Classification weights, thresholds, temporal parameters</td>
+</tr>
+<tr>
+<td><code>CourtDetectorConfig</code></td>
+<td>Court detection geometry and Hough/Canny parameters</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key function:</strong></p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-def">def</span> <span class="token function">load_config</span><span class="token punctuation">(</span>yaml_path<span class="token punctuation">:</span> <span class="token builtin">str</span> <span class="token operator">|</span> Path <span class="token operator">|</span> <span class="token boolean">None</span> <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> PipelineConfig
+</code></pre><p>Creates a <code>PipelineConfig</code> with built-in defaults, then recursively overlays any values found in the YAML file. Missing YAML keys retain their defaults.</p>
+<hr>
+<h3 id="72-pipelinepy">7.2 <code>pipeline.py</code> </h3>
+<p><strong>Purpose:</strong> Main orchestrator that coordinates all pipeline phases and provides the CLI entry point.</p>
+<p><strong>Key functions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>run_pipeline(video_path, output_dir, config)</code></td>
+<td>Executes the full end-to-end pipeline</td>
+</tr>
+<tr>
+<td><code>main()</code></td>
+<td>CLI entry point; parses arguments, loads config, applies overrides</td>
+</tr>
+<tr>
+<td><code>parse_args()</code></td>
+<td>Defines the <code>argparse</code> CLI interface</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Process management:</strong></p>
+<ul>
+<li><code>_kill_stale_pipeline_processes()</code> — Scans <code>/proc</code> for zombie or leftover pipeline processes and terminates them.</li>
+<li><code>_register_exit_cleanup()</code> — Registers <code>atexit</code> and signal handlers (<code>SIGTERM</code>, <code>SIGINT</code>) to clean up GPU cache and child processes on exit.</li>
+</ul>
+<hr>
+<h3 id="73-ball_trackerpy">7.3 <code>ball_tracker.py</code> </h3>
+<p><strong>Purpose:</strong> Tennis ball detection using the TrackNet convolutional neural network.</p>
+<p><strong>Class:</strong> <code>BallTracker</code></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__init__(config, device)</code></td>
+<td>Loads TrackNet weights; optionally applies <code>torch.compile</code></td>
+</tr>
+<tr>
+<td><code>detect(frames) → list[tuple]</code></td>
+<td>Runs batched inference on all frames; returns <code>(x, y)</code> or <code>(None, None)</code> per frame</td>
+</tr>
+<tr>
+<td><code>_postprocess(feature_map)</code></td>
+<td>Extracts ball coordinates from the model's heatmap output via thresholding and <code>cv2.HoughCircles</code></td>
+</tr>
+<tr>
+<td><code>_remove_outliers(ball_track)</code></td>
+<td>Removes spatially-inconsistent detections where a point is far from (or missing) both its predecessor and successor</td>
+</tr>
+</tbody>
+</table>
+<p><strong>TrackNet inference details:</strong></p>
+<ul>
+<li>Input: 3 consecutive frames concatenated along the channel dimension (9 channels total), resized to 640×360.</li>
+<li>Output: Per-pixel classification logits, from which a heatmap is derived via <code>argmax</code>.</li>
+<li>Ball location is extracted by thresholding the heatmap and fitting circles with <code>cv2.HoughCircles</code>.</li>
+<li>Coordinates are scaled back to the original video resolution.</li>
+<li>Mixed precision (<code>torch.amp.autocast</code> with FP16) is used on CUDA devices.</li>
+</ul>
+<hr>
+<h3 id="74-player_detectorpy">7.4 <code>player_detector.py</code> </h3>
+<p><strong>Purpose:</strong> Player/person detection using the Ultralytics YOLO framework.</p>
+<p><strong>Class:</strong> <code>PlayerDetector</code></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__init__(config, device)</code></td>
+<td>Loads YOLO model</td>
+</tr>
+<tr>
+<td><code>detect(frames) → list[dict]</code></td>
+<td>Batched inference returning per-frame player data</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Per-frame output dict:</strong></p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token punctuation">{</span>
+    <span class="token string">"boxes"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>x1<span class="token punctuation">,</span> y1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> y2<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token punctuation">,</span>          <span class="token comment"># Tight bounding boxes</span>
+    <span class="token string">"expanded_boxes"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>x1<span class="token punctuation">,</span> y1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> y2<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token comment"># Expanded for ball-in-bbox gate</span>
+    <span class="token string">"centers"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>cx<span class="token punctuation">,</span> cy<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token punctuation">,</span>                  <span class="token comment"># Box centre points</span>
+    <span class="token string">"count"</span><span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">,</span>                                <span class="token comment"># Number of detected players</span>
+    <span class="token string">"confidences"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">float</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token punctuation">,</span>                 <span class="token comment"># Detection confidence scores</span>
+<span class="token punctuation">}</span>
+</code></pre><p>The <code>expanded_boxes</code> are produced by inflating each bounding box by a fraction of its own dimensions: each side is expanded by <code>bbox_expand_h / 2 × box_width</code> horizontally (left and right) and <code>bbox_expand_v / 2 × box_height</code> vertically (top and bottom). With defaults of 0.60 and 0.30, this adds 30% of box width per side and 15% of box height per side. These expanded regions are used by the classifier's ball-in-bbox gate.</p>
+<hr>
+<h3 id="75-court_detectorpy">7.5 <code>court_detector.py</code> </h3>
+<p><strong>Purpose:</strong> Court region of interest (ROI) detection using classical computer vision.</p>
+<p><strong>Class:</strong> <code>CourtDetector</code></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detect(frame) → ndarray | None</code></td>
+<td>Main detection entry point; returns the padded polygon or <code>None</code> on failure</td>
+</tr>
+<tr>
+<td><code>is_point_in_court(x, y) → bool</code></td>
+<td>Point-in-mask test</td>
+</tr>
+<tr>
+<td><code>filter_ball_positions(positions) → list</code></td>
+<td>Filters ball detections to court region</td>
+</tr>
+<tr>
+<td><code>filter_player_data(info) → dict</code></td>
+<td>Filters players by foot position (bottom-centre of bbox)</td>
+</tr>
+<tr>
+<td><code>filter_player_data_list(data) → list</code></td>
+<td>Batch version of <code>filter_player_data</code></td>
+</tr>
+<tr>
+<td><code>set_padding(px) → ndarray | None</code></td>
+<td>Adjusts padding and rebuilds mask without re-detection</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Internal pipeline:</strong></p>
+<ol>
+<li>Canny edge detection → Hough line segment detection</li>
+<li>Filter to steep (near-vertical) segments as sideline candidates</li>
+<li>Split into left/right groups by midpoint x-coordinate</li>
+<li><code>cv2.fitLine</code> per group → extend to full frame height</li>
+<li>Shift lines outward by <code>padding_px</code> perpendicular to line direction</li>
+<li>Detect far-court baseline for cap polygon (prevents over-narrow top)</li>
+<li>Build binary mask via <code>cv2.fillPoly</code></li>
+<li>Validate area (reject if &lt; 5% or &gt; 95% of frame)</li>
+</ol>
+<hr>
+<h3 id="76-state_classifierpy">7.6 <code>state_classifier.py</code> </h3>
+<p><strong>Purpose:</strong> Multi-signal temporal classification of play vs. dead states.</p>
+<p><strong>Class:</strong> <code>StateClassifier</code></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>classify(ball_positions, player_data) → dict</code></td>
+<td>Full classification pipeline; returns states, scores, segments, and summary</td>
+</tr>
+<tr>
+<td><code>_compute_play_score(det_rate, speed, players) → ndarray</code></td>
+<td>Weighted combination of normalised signals</td>
+</tr>
+<tr>
+<td><code>_hysteresis(scores, ...) → (states, gate_count)</code></td>
+<td>Dual-threshold state machine with optional bbox gate</td>
+</tr>
+<tr>
+<td><code>_filter_short_segments(states, min_play, min_dead)</code></td>
+<td>Merges segments below minimum duration (iterative, up to 3 passes)</td>
+</tr>
+<tr>
+<td><code>_filter_isolated_play(states) → (states, killed_count)</code></td>
+<td>Removes short play segments surrounded by disproportionate dead time</td>
+</tr>
+<tr>
+<td><code>_extract_segments(states) → list[dict]</code></td>
+<td>Converts frame-level states to timed segment list</td>
+</tr>
+<tr>
+<td><code>_build_summary(states, segments) → dict</code></td>
+<td>Computes aggregate statistics</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Resolution-invariant speed normalisation:</strong></p>
+<p>Ball speeds are scaled by the ratio of a reference diagonal (1920×1080) to the actual video diagonal. This ensures the <code>ball_speed_cap</code> parameter behaves consistently across resolutions.</p>
+<hr>
+<h3 id="77-rendererpy">7.7 <code>renderer.py</code> </h3>
+<p><strong>Purpose:</strong> Annotated video output with frame-by-frame overlays.</p>
+<p><strong>Function:</strong> <code>render_output_video()</code></p>
+<p><strong>Overlay elements per frame:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Visual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Header bar</strong></td>
+<td>Green (play) or red (dead) semi-transparent rectangle at top</td>
+</tr>
+<tr>
+<td><strong>State label</strong></td>
+<td><code>"&gt; PLAY"</code> or `"</td>
+</tr>
+<tr>
+<td><strong>Timestamp</strong></td>
+<td>Current time / total duration</td>
+</tr>
+<tr>
+<td><strong>Play score</strong></td>
+<td>Numerical score value</td>
+</tr>
+<tr>
+<td><strong>Ball marker</strong></td>
+<td>Yellow concentric circles at detected ball position</td>
+</tr>
+<tr>
+<td><strong>Player boxes</strong></td>
+<td>Cyan tight bounding boxes (BGR <code>255,200,0</code>) + white expanded bounding boxes</td>
+</tr>
+<tr>
+<td><strong>Timeline bar</strong></td>
+<td>Colour-coded bar at frame bottom with white playhead indicator</td>
+</tr>
+<tr>
+<td><strong>Court polygon</strong></td>
+<td>Cyan outline (BGR <code>255,255,0</code>; only when <code>court.debug_overlay</code> is enabled)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Encoding:</strong><br>
+Frames are piped to FFmpeg via <code>subprocess.Popen</code> stdin for efficient single-pass H.264 encoding with <code>libx264</code>, <code>preset=fast</code>, <code>CRF=23</code>. If FFmpeg is unavailable, OpenCV's <code>VideoWriter</code> with <code>mp4v</code> codec is used as a fallback.</p>
+<hr>
+<h3 id="78-io_utilspy">7.8 <code>io_utils.py</code> </h3>
+<p><strong>Purpose:</strong> Video I/O, reporting, and system resource helpers.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>probe_video(path) → (fps, w, h, n_frames)</code></td>
+<td>Reads video metadata via OpenCV properties; falls back to manual frame counting if <code>CAP_PROP_FRAME_COUNT</code> returns ≤ 0</td>
+</tr>
+<tr>
+<td><code>decode_chunk(path, start, count) → list[ndarray]</code></td>
+<td>Decodes a specific frame range</td>
+</tr>
+<tr>
+<td><code>write_json_report(path, video, fps, classification)</code></td>
+<td>Writes JSON report file</td>
+</tr>
+<tr>
+<td><code>fmt_time(seconds) → str</code></td>
+<td>Formats seconds as <code>MM:SS.ss</code></td>
+</tr>
+<tr>
+<td><code>get_available_ram_gb() → float</code></td>
+<td>Reads <code>MemAvailable</code> from <code>/proc/meminfo</code></td>
+</tr>
+<tr>
+<td><code>get_rss_mb() → float</code></td>
+<td>Reads process RSS from <code>/proc/self/status</code></td>
+</tr>
+<tr>
+<td><code>auto_chunk_size(w, h) → int</code></td>
+<td>Calculates chunk size from RAM (40% budget, clamped 500–5000, rounded to 100)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="8-classification-algorithm-deep-dive">8. Classification Algorithm Deep Dive </h2>
+<p>The state classifier converts continuous perception signals into a binary play/dead decision through a carefully designed signal processing pipeline:</p>
+<h3 id="step-1--per-frame-raw-signals">Step 1 — Per-frame Raw Signals </h3>
+<p>Three raw signals are computed for every frame:</p>
+<ul>
+<li><strong><code>detected[i]</code></strong> — Binary: 1.0 if ball was detected, 0.0 otherwise.</li>
+<li><strong><code>speeds[i]</code></strong> — Euclidean distance (pixels) the ball moved since the previous frame. Scaled by the resolution normalisation factor. Zero if either frame has no detection.</li>
+<li><strong><code>player_counts[i]</code></strong> — Number of players detected in the frame.</li>
+</ul>
+<h3 id="step-2--windowed-feature-smoothing">Step 2 — Windowed Feature Smoothing </h3>
+<p>Each signal is smoothed with a uniform (box) filter of size <code>window_size</code> (default: 25 frames ≈ 0.83s at 30fps):</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>detection_rate[i] = mean(detected[i-w/2 : i+w/2])
+speed_smooth[i]   = mean(speeds[i-w/2 : i+w/2])
+player_smooth[i]  = mean(player_counts[i-w/2 : i+w/2])
+</code></pre><h3 id="step-3--normalised-weighted-play-score">Step 3 — Normalised Weighted Play Score </h3>
+<p>Each smoothed signal is normalised to [0, 1] by clipping at its respective cap:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>score</mtext><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo><mo>=</mo><msub><mi>w</mi><mi>d</mi></msub><mo>⋅</mo><mi>min</mi><mo>⁡</mo><mtext> ⁣</mtext><mrow><mo fence="true">(</mo><mfrac><mrow><mtext>det_rate</mtext><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo></mrow><mtext>det_cap</mtext></mfrac><mo separator="true">,</mo><mtext>  </mtext><mn>1</mn><mo fence="true">)</mo></mrow><mo>+</mo><msub><mi>w</mi><mi>s</mi></msub><mo>⋅</mo><mi>min</mi><mo>⁡</mo><mtext> ⁣</mtext><mrow><mo fence="true">(</mo><mfrac><mrow><mtext>speed</mtext><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo></mrow><mtext>spd_cap</mtext></mfrac><mo separator="true">,</mo><mtext>  </mtext><mn>1</mn><mo fence="true">)</mo></mrow><mo>+</mo><msub><mi>w</mi><mi>p</mi></msub><mo>⋅</mo><mi>min</mi><mo>⁡</mo><mtext> ⁣</mtext><mrow><mo fence="true">(</mo><mfrac><mrow><mtext>players</mtext><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo></mrow><mtext>plr_cap</mtext></mfrac><mo separator="true">,</mo><mtext>  </mtext><mn>1</mn><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{score}[i] = w_d \cdot \min\!\left(\frac{\text{det\_rate}[i]}{\text{det\_cap}},\; 1\right) + w_s \cdot \min\!\left(\frac{\text{speed}[i]}{\text{spd\_cap}},\; 1\right) + w_p \cdot \min\!\left(\frac{\text{players}[i]}{\text{plr\_cap}},\; 1\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">score</span></span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.5945em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.446em;vertical-align:-0.996em;"></span><span class="mop">min</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">det_cap</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.7em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">det_rate</span></span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.996em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.5945em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.446em;vertical-align:-0.996em;"></span><span class="mop">min</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">spd_cap</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">speed</span></span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.996em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7306em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.446em;vertical-align:-0.996em;"></span><span class="mop">min</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">plr_cap</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">players</span></span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.996em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span></p>
+<p>Default weights: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mi>d</mi></msub><mo>=</mo><mn>0.45</mn></mrow><annotation encoding="application/x-tex">w_d = 0.45</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.45</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mi>s</mi></msub><mo>=</mo><mn>0.35</mn></mrow><annotation encoding="application/x-tex">w_s = 0.35</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.35</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mi>p</mi></msub><mo>=</mo><mn>0.20</mn></mrow><annotation encoding="application/x-tex">w_p = 0.20</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.20</span></span></span></span>.</p>
+<h3 id="step-4--gaussian-temporal-smoothing">Step 4 — Gaussian Temporal Smoothing </h3>
+<p>A Gaussian filter (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo>=</mo><mn>12.5</mn></mrow><annotation encoding="application/x-tex">\sigma = 12.5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">12.5</span></span></span></span> frames) further smooths the play score to reduce rapid fluctuations.</p>
+<h3 id="step-5--hysteresis-thresholding">Step 5 — Hysteresis Thresholding </h3>
+<p>A state machine with two thresholds prevents rapid oscillation:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>State = DEAD:
+    if score[i] ≥ enter_play_threshold (0.55)  →  transition to PLAY
+        (unless suppressed by bbox gate)
+
+State = PLAY:
+    if score[i] &lt; exit_play_threshold (0.35)   →  transition to DEAD
+</code></pre><p>The gap between thresholds (0.55 − 0.35 = 0.20) creates a dead zone that prevents chattering near the decision boundary.</p>
+<h3 id="step-6--ball-in-bbox-gate">Step 6 — Ball-in-Bbox Gate </h3>
+<p>Before a dead→play transition is accepted, the system examines the last <code>bbox_gate_lookback</code> (13) frames. Of those frames where the ball was successfully detected, it computes the fraction where the ball fell inside any expanded player bounding box. If that fraction exceeds <code>bbox_gate_ratio</code> (50%), the transition is suppressed — the ball is likely being held or bounced by a player between points, not in active play. Frames with no ball detection are excluded from the ratio calculation.</p>
+<h3 id="step-7--minimum-duration-filter">Step 7 — Minimum Duration Filter </h3>
+<p>Segments shorter than <code>min_play_duration</code> (1.5s) or <code>min_dead_duration</code> (2.0s) are merged into the surrounding state. This runs iteratively (up to 3 passes) to handle cascading merges.</p>
+<h3 id="step-8--isolated-play-filter">Step 8 — Isolated Play Filter </h3>
+<p>Short play segments (&lt; <code>isolated_max_play</code> = 3.0s) that are surrounded by dead segments on both sides, where the play duration is less than <code>isolated_dead_ratio</code> (2.5×) the combined surrounding dead time, are reclassified as dead. This catches brief false positives from replays or ball boys.</p>
+<hr>
+<h2 id="9-court-detection-algorithm">9. Court Detection Algorithm </h2>
+<p>The court detector identifies the playing area to filter out off-court noise. It operates on a single frame (the first decoded frame) and produces a binary mask.</p>
+<h3 id="algorithm-steps">Algorithm Steps </h3>
+<ol>
+<li>
+<p><strong>Preprocessing:</strong> Convert to grayscale → Gaussian blur (5×5) → Canny edge detection.</p>
+</li>
+<li>
+<p><strong>Line detection:</strong> <code>cv2.HoughLinesP</code> detects line segments. Segments are filtered to keep only "steep" lines (angle ≥ 20° from horizontal) as sideline candidates.</p>
+</li>
+<li>
+<p><strong>Left/right grouping:</strong> Segments are split by their midpoint x-coordinate relative to frame centre.</p>
+</li>
+<li>
+<p><strong>Line fitting:</strong> <code>cv2.fitLine</code> (L2 distance) fits a single line through all endpoints in each group. The fitted line is extended to the full frame height (y=0 to y=frame_height).</p>
+</li>
+<li>
+<p><strong>Perpendicular padding:</strong> Each sideline is shifted outward by <code>padding_px</code> pixels perpendicular to its direction vector. The direction of "outward" is verified and corrected if needed.</p>
+</li>
+<li>
+<p><strong>Baseline cap:</strong> The longest near-horizontal line segment in the upper portion of the frame is detected as the far-court baseline. Above this line, the ROI extends to full frame width, preventing the converging padded sidelines from clipping the upper court.</p>
+</li>
+<li>
+<p><strong>Mask generation:</strong> The final polygon (either a 4-point trapezoid or an 8-point capped polygon) is rasterised into a binary mask via <code>cv2.fillPoly</code>.</p>
+</li>
+<li>
+<p><strong>Validation:</strong> The mask area must be between 5% and 95% of the total frame area.</p>
+</li>
+</ol>
+<h3 id="filtering-behaviour">Filtering Behaviour </h3>
+<ul>
+<li><strong>Ball positions:</strong> Off-court <code>(x, y)</code> coordinates are replaced with <code>(None, None)</code>.</li>
+<li><strong>Player boxes:</strong> Players are retained only if their foot position (bottom-centre of bounding box) falls within the court mask.</li>
+<li><strong>Graceful degradation:</strong> If detection fails, all filtering is disabled and the pipeline processes the full frame.</li>
+</ul>
+<hr>
+<h2 id="10-memory-management--chunking">10. Memory Management &amp; Chunking </h2>
+<p>The pipeline is designed to process arbitrarily long videos on memory-constrained systems.</p>
+<h3 id="auto-chunk-sizing">Auto-Chunk Sizing </h3>
+<p>When <code>chunk_frames = 0</code>, the system reads <code>/proc/meminfo</code> and allocates 40% of available RAM to frame storage:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>chunk_size</mtext><mo>=</mo><mrow><mo fence="true">⌊</mo><mfrac><mrow><mn>0.40</mn><mo>×</mo><mtext>MemAvailable</mtext></mrow><mrow><mi>H</mi><mo>×</mo><mi>W</mi><mo>×</mo><mn>3</mn><mo>+</mo><mn>360</mn><mo>×</mo><mn>640</mn><mo>×</mo><mn>3</mn></mrow></mfrac><mo fence="true">⌋</mo></mrow></mrow><annotation encoding="application/x-tex">\text{chunk\_size} = \left\lfloor \frac{0.40 \times \text{MemAvailable}}{H \times W \times 3 + 360 \times 640 \times 3} \right\rfloor</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0044em;vertical-align:-0.31em;"></span><span class="mord text"><span class="mord">chunk_size</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">⌊</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">360</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">640</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">3</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0.40</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">MemAvailable</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">⌋</span></span></span></span></span></span></span></p>
+<p>The result is clamped to [500, 5000] and rounded down to the nearest 100.</p>
+<h3 id="per-chunk-cleanup">Per-Chunk Cleanup </h3>
+<p>After each chunk is processed:</p>
+<ol>
+<li>Python references to frame arrays are deleted.</li>
+<li><code>torch.cuda.empty_cache()</code> releases GPU memory.</li>
+<li><code>gc.collect()</code> runs the Python garbage collector.</li>
+<li><code>malloc_trim(0)</code> (via <code>ctypes</code>) returns freed heap memory to the OS — important because NumPy's large array allocations can otherwise fragment the heap.</li>
+</ol>
+<h3 id="tracknet-overlap">TrackNet Overlap </h3>
+<p>TrackNet uses a 3-frame sliding window. To maintain continuity across chunk boundaries, the last 2 frames of each chunk are carried forward as overlap for the next chunk. The overlapping results are trimmed from the output to avoid duplication.</p>
+<hr>
+<h2 id="11-system-benchmarking--hardware-requirements">11. System Benchmarking &amp; Hardware Requirements </h2>
+<p>This section provides hardware sizing guidance to run the pipeline without OOM errors, based on analysis of the models loaded concurrently and the memory-aware chunking system.</p>
+<blockquote>
+<p><strong>Tested configuration:</strong> The pipeline has been rigorously tested on <strong>NVIDIA L4 (24 GiB) × 1 GPU | 8 vCPUs | 32 GiB RAM</strong>. This serves as the verified reference platform.</p>
+</blockquote>
+<h3 id="concurrent-model-resource-profile">Concurrent Model Resource Profile </h3>
+<p>During Phase 2 (chunked detection), both models are loaded on the GPU simultaneously:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Model</th>
+<th>Parameters</th>
+<th>Input Size</th>
+<th>Default Batch Size</th>
+<th>Precision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ball Tracker</strong></td>
+<td>TrackNet (CNN) + <code>torch.compile</code></td>
+<td>~2–3M</td>
+<td>640×360×9 (3-frame windows)</td>
+<td>16</td>
+<td>FP16 (<code>torch.amp.autocast</code>)</td>
+</tr>
+<tr>
+<td><strong>Player Detector</strong></td>
+<td>YOLO26s (Ultralytics)</td>
+<td>9.5M / 20.7 GFLOPs</td>
+<td>640×640</td>
+<td>32</td>
+<td>FP16 (<code>half=True</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>YOLO26s is an edge-optimised model (NMS-free, DFL removed) with roughly half the parameters and FLOPs of equivalent YOLOv6 models, enabling efficient inference on modest GPUs.</p>
+<h3 id="gpu-vram-breakdown-peak-during-phase-2">GPU VRAM Breakdown (Peak, During Phase 2) </h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Estimated VRAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TrackNet weights + <code>torch.compile</code> graph cache</td>
+<td>~0.5–1.0 GB</td>
+</tr>
+<tr>
+<td>TrackNet batch activations (bs=16, FP16)</td>
+<td>~200–400 MB</td>
+</tr>
+<tr>
+<td>YOLO26s weights (fused)</td>
+<td>~100–200 MB</td>
+</tr>
+<tr>
+<td>YOLO26s batch activations (bs=32, FP16)</td>
+<td>~300–600 MB</td>
+</tr>
+<tr>
+<td>CUDA context + fragmentation overhead</td>
+<td>~500 MB</td>
+</tr>
+<tr>
+<td><strong>Peak total</strong></td>
+<td><strong>~1.6–2.7 GB</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="system-ram-breakdown-peak-1080p">System RAM Breakdown (Peak, 1080p) </h3>
+<p>The pipeline's <code>auto_chunk_size()</code> allocates <strong>40% of available RAM</strong> for frame buffers. At 1920×1080 each frame consumes ~6.2 MB uncompressed (H×W×3 bytes).</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Estimated RAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frame buffer per chunk (e.g., 2000 frames × 6.2 MB)</td>
+<td>~12.4 GB</td>
+</tr>
+<tr>
+<td>TrackNet resized copies per batch (640×360)</td>
+<td>~100–200 MB</td>
+</tr>
+<tr>
+<td>Accumulated results (ball positions + player dicts for full video)</td>
+<td>~200–500 MB</td>
+</tr>
+<tr>
+<td>Python / PyTorch / OpenCV overhead</td>
+<td>~1–2 GB</td>
+</tr>
+<tr>
+<td>OS + other processes</td>
+<td>~2–3 GB</td>
+</tr>
+<tr>
+<td><strong>Peak total</strong></td>
+<td><strong>~16–18 GB</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="cpu-usage-profile">CPU Usage Profile </h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>CPU Characteristic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenCV frame decoding</td>
+<td>Sequential, single-core; benefits from high turbo clock</td>
+</tr>
+<tr>
+<td><code>cv2.HoughCircles</code> post-processing</td>
+<td>Per-frame CPU-bound (called per batch window)</td>
+</tr>
+<tr>
+<td>State classification</td>
+<td>Vectorised NumPy/SciPy rolling-window operations</td>
+</tr>
+<tr>
+<td><code>torch.compile</code> JIT compilation</td>
+<td>CPU-intensive one-time cost at model load</td>
+</tr>
+<tr>
+<td>Court detection (Phase 1b)</td>
+<td>Single-frame Canny + Hough; negligible</td>
+</tr>
+</tbody>
+</table>
+<h3 id="known-memory-safety-caveats">Known Memory Safety Caveats </h3>
+<p>Two design interactions in the current pipeline can cause OOM under tight resource constraints:</p>
+<ol>
+<li>
+<p><strong>Chunk size is calculated before models load.</strong> <code>auto_chunk_size()</code> reads <code>MemAvailable</code> in Phase 1, but TrackNet and YOLO don't load until Phase 2. Model loading + <code>torch.compile</code> JIT compilation can consume ~1–2 GB of additional system RAM <em>after</em> the chunk size was already decided. On systems with ≤16 GB, the calculated chunk may be too aggressive for the memory that's actually free during processing.</p>
+</li>
+<li>
+<p><strong>Minimum chunk clamp overrides budget.</strong> <code>auto_chunk_size()</code> enforces a floor of 500 frames (<code>max(500, ...)</code>). At 1080p, 500 frames = ~3.1 GB. On a busy 16 GB system where <code>MemAvailable</code> is ~7 GB at calculation time, the budget would suggest ~400 frames, but the clamp forces 500 — which, after model loading, can push the system into swap or OOM.</p>
+</li>
+<li>
+<p><strong><code>torch.compile</code> + <code>autocast</code> memory amplification.</strong> The BallTracker sends FP32 tensors into a <code>torch.compile</code>'d model wrapped in <code>torch.amp.autocast(dtype=torch.float16)</code>. This specific pattern is subject to a <a href="https://github.com/pytorch/pytorch/issues/133637">known PyTorch issue</a> where certain compiled + autocasted ops can spike GPU memory by up to 8×. On 4 GB GPUs this can trigger CUDA OOM unpredictably.</p>
+</li>
+<li>
+<p><strong>Display GPUs have reduced usable VRAM.</strong> A GPU driving a monitor (e.g., GTX 1650 as primary display) may have only ~3.5 GB effective VRAM after framebuffer allocation, further tightening the budget.</p>
+</li>
+</ol>
+<h3 id="recommended-system-configurations">Recommended System Configurations </h3>
+<h4 id="minimum-functional-oom-safe-with-tuning">Minimum (functional; OOM-safe with tuning) </h4>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Specification</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CPU</strong></td>
+<td>4 cores / 8 threads @ 3.0 GHz</td>
+<td>e.g., Intel i5-12400 / AMD Ryzen 5 5600</td>
+</tr>
+<tr>
+<td><strong>RAM</strong></td>
+<td>16 GB DDR4</td>
+<td>Requires manual <code>chunk_frames</code> override (see below)</td>
+</tr>
+<tr>
+<td><strong>GPU</strong></td>
+<td>6 GB VRAM</td>
+<td>e.g., GTX 1660 Super / RTX 2060; 4 GB cards risk CUDA OOM due to <code>torch.compile</code> + <code>autocast</code> spikes</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>16 GB RAM requires manual configuration.</strong> Set <code>chunk_frames: 300</code> in <code>config.yaml</code> to prevent the auto-chunker (which runs before model loading) from over-allocating. Also reduce <code>yolo.batch_size</code> to <code>16</code> and <code>tracknet.batch_size</code> to <code>8</code> to keep peak system + GPU memory in check. Close other applications before running.</p>
+</blockquote>
+<blockquote>
+<p>⚠️ <strong>4 GB VRAM GPUs (GTX 1650, etc.) are not recommended.</strong> While models theoretically fit at ~1.6 GB peak, <code>torch.compile</code> + <code>autocast</code> memory amplification and display-GPU VRAM overhead make 4 GB unreliable. If you must use 4 GB, disable <code>torch.compile</code> by adding <code>model.eval()</code> without the compile step (requires a code change in <code>ball_tracker.py</code>), and reduce both batch sizes to 8.</p>
+</blockquote>
+<h4 id="recommended-smooth-operation-no-oom-risk">Recommended (smooth operation, no OOM risk) </h4>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Specification</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CPU</strong></td>
+<td>6 cores / 12 threads @ 3.5 GHz</td>
+<td>e.g., Intel i5-13600K / AMD Ryzen 5 7600</td>
+</tr>
+<tr>
+<td><strong>RAM</strong></td>
+<td>32 GB DDR4/DDR5</td>
+<td>Chunk size ~2000+ frames at 1080p; comfortable headroom even after model loading</td>
+</tr>
+<tr>
+<td><strong>GPU</strong></td>
+<td>8 GB VRAM</td>
+<td>e.g., RTX 4060 / RTX 3060 8 GB; room for <code>torch.compile</code> overhead and larger batches</td>
+</tr>
+</tbody>
+</table>
+<h4 id="optimal-fast-processing-4k-ready">Optimal (fast processing, 4K-ready) </h4>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Specification</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CPU</strong></td>
+<td>8+ cores / 16 threads @ 4.0+ GHz</td>
+<td>e.g., Intel i7-14700K / AMD Ryzen 7 7800X3D</td>
+</tr>
+<tr>
+<td><strong>RAM</strong></td>
+<td>64 GB DDR5</td>
+<td>Large chunks (~4000–5000 frames); can push <code>chunk_frames</code> near max</td>
+</tr>
+<tr>
+<td><strong>GPU</strong></td>
+<td>12+ GB VRAM</td>
+<td>e.g., RTX 4070 Ti / RTX 3060 12 GB; safely increase batch sizes to 32+ / 64+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="reference-throughput-1080p-10-min--30-fps--18k-frames">Reference Throughput (1080p, 10 min @ 30 fps ≈ 18K frames) </h4>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Expected Speed</th>
+<th>Wall Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Minimum</td>
+<td>~1–2× realtime</td>
+<td>~5–10 min</td>
+</tr>
+<tr>
+<td>Recommended</td>
+<td>~2–4× realtime</td>
+<td>~2.5–5 min</td>
+</tr>
+<tr>
+<td>Optimal</td>
+<td>~4–6× realtime</td>
+<td>~1.5–2.5 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="config-knobs-to-tune-if-hitting-oom">Config Knobs to Tune if Hitting OOM </h3>
+<table>
+<thead>
+<tr>
+<th>Config Key</th>
+<th>Default</th>
+<th>Effect on Memory</th>
+<th>Minimum-spec Override</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>chunk_frames</code></td>
+<td><code>0</code> (auto)</td>
+<td>Lower → less system RAM per chunk</td>
+<td>Set to <code>300</code> on 16 GB systems</td>
+</tr>
+<tr>
+<td><code>tracknet.batch_size</code></td>
+<td><code>16</code></td>
+<td>Lower → less GPU VRAM</td>
+<td>Set to <code>8</code> on 6 GB GPUs</td>
+</tr>
+<tr>
+<td><code>yolo.batch_size</code></td>
+<td><code>32</code></td>
+<td>Lower → less GPU VRAM</td>
+<td>Set to <code>16</code> on 6 GB GPUs</td>
+</tr>
+<tr>
+<td><code>render_video</code></td>
+<td><code>false</code></td>
+<td><code>true</code> adds a second full-video pass in RAM</td>
+<td>Keep <code>false</code> on minimum spec</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="12-cli-reference">12. CLI Reference </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>usage: pipeline.py [-h] --video VIDEO [--output OUTPUT] [--config CONFIG]
+                   [--tracknet-batch N] [--yolo-batch N]
+                   [--enter-threshold F] [--exit-threshold F]
+                   [--bbox-expand-h F] [--bbox-expand-v F]
+                   [--no-bbox-gate] [--no-court-detection]
+                   [--court-padding N] [--court-debug]
+</code></pre><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--video</code></td>
+<td><em>(required)</em></td>
+<td>Path to input video file</td>
+</tr>
+<tr>
+<td><code>--output</code></td>
+<td><code>data/output</code></td>
+<td>Output directory</td>
+</tr>
+<tr>
+<td><code>--config</code></td>
+<td><code>config/config.yaml</code> (if exists)</td>
+<td>Path to YAML config file</td>
+</tr>
+<tr>
+<td><code>--tracknet-batch</code></td>
+<td>From config</td>
+<td>TrackNet batch size</td>
+</tr>
+<tr>
+<td><code>--yolo-batch</code></td>
+<td>From config</td>
+<td>YOLO batch size</td>
+</tr>
+<tr>
+<td><code>--enter-threshold</code></td>
+<td>From config</td>
+<td>Hysteresis enter-play threshold</td>
+</tr>
+<tr>
+<td><code>--exit-threshold</code></td>
+<td>From config</td>
+<td>Hysteresis exit-play threshold</td>
+</tr>
+<tr>
+<td><code>--bbox-expand-h</code></td>
+<td>From config</td>
+<td>Horizontal bbox expansion ratio</td>
+</tr>
+<tr>
+<td><code>--bbox-expand-v</code></td>
+<td>From config</td>
+<td>Vertical bbox expansion ratio</td>
+</tr>
+<tr>
+<td><code>--no-bbox-gate</code></td>
+<td><code>False</code></td>
+<td>Disable ball-in-bbox gate</td>
+</tr>
+<tr>
+<td><code>--no-court-detection</code></td>
+<td><code>False</code></td>
+<td>Disable court region detection</td>
+</tr>
+<tr>
+<td><code>--court-padding</code></td>
+<td>From config</td>
+<td>Court sideline padding (pixels)</td>
+</tr>
+<tr>
+<td><code>--court-debug</code></td>
+<td><code>False</code></td>
+<td>Draw court boundary on output video</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Invocation methods:</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token comment"># Direct module execution</span>
+python src/pipeline.py <span class="token parameter variable">--video</span> data/videos/clip.mp4
+
+<span class="token comment"># Package execution</span>
+python <span class="token parameter variable">-m</span> src <span class="token parameter variable">--video</span> data/videos/clip.mp4 <span class="token parameter variable">--output</span> data/output
+
+<span class="token comment"># With custom config and overrides</span>
+python <span class="token parameter variable">-m</span> src.pipeline <span class="token parameter variable">--video</span> clip.mp4 <span class="token parameter variable">--config</span> my_config.yaml --enter-threshold <span class="token number">0.50</span>
+</code></pre><p><strong>Configuration precedence:</strong> CLI arguments &gt; YAML file &gt; Built-in defaults.</p>
+<hr>
+<h2 id="13-batch-processing">13. Batch Processing </h2>
+<p>The <code>run_all.sh</code> script processes all <code>.mp4</code> files in a specified directory:</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">bash</span> run_all.sh
+</code></pre><p><strong>Behaviour:</strong></p>
+<ul>
+<li>Scans <code>01. Videos/</code> for <code>.mp4</code> files.</li>
+<li>Activates <code>venv/</code> if present.</li>
+<li>Runs the pipeline on each video sequentially.</li>
+<li>Writes outputs to <code>data/output/</code>, logs to <code>data/logs/</code>.</li>
+<li>Prints per-video success/failure markers.</li>
+<li>Prints a summary with total, succeeded, and failed counts.</li>
+<li>Uses <code>set -euo pipefail</code> for strict error handling (but individual video failures are caught and counted).</li>
+</ul>
+<hr>
+<h2 id="14-output-formats">14. Output Formats </h2>
+<h3 id="annotated-video-_analysismp4">Annotated Video (<code>*_analysis.mp4</code>) </h3>
+<p>An H.264-encoded copy of the input with overlaid annotations:</p>
+<ul>
+<li>Colour-coded header bar (green = play, red = dead)</li>
+<li>State label, timestamp, and play score</li>
+<li>Ball detection markers (yellow circles)</li>
+<li>Player bounding boxes (cyan = tight, white = expanded)</li>
+<li>Timeline bar at bottom with playhead indicator</li>
+</ul>
+<h3 id="json-report-_reportjson">JSON Report (<code>*_report.json</code>) </h3>
+<pre data-role="codeBlock" data-info="json" class="language-json json"><code><span class="token punctuation">{</span>
+  <span class="token property">"video"</span><span class="token operator">:</span> <span class="token string">"clip.mp4"</span><span class="token punctuation">,</span>
+  <span class="token property">"fps"</span><span class="token operator">:</span> <span class="token number">30.0</span><span class="token punctuation">,</span>
+  <span class="token property">"total_frames"</span><span class="token operator">:</span> <span class="token number">9000</span><span class="token punctuation">,</span>
+  <span class="token property">"total_duration"</span><span class="token operator">:</span> <span class="token number">300.0</span><span class="token punctuation">,</span>
+  <span class="token property">"play_frames"</span><span class="token operator">:</span> <span class="token number">5400</span><span class="token punctuation">,</span>
+  <span class="token property">"dead_frames"</span><span class="token operator">:</span> <span class="token number">3600</span><span class="token punctuation">,</span>
+  <span class="token property">"play_time"</span><span class="token operator">:</span> <span class="token number">180.0</span><span class="token punctuation">,</span>
+  <span class="token property">"dead_time"</span><span class="token operator">:</span> <span class="token number">120.0</span><span class="token punctuation">,</span>
+  <span class="token property">"play_pct"</span><span class="token operator">:</span> <span class="token number">60.0</span><span class="token punctuation">,</span>
+  <span class="token property">"dead_pct"</span><span class="token operator">:</span> <span class="token number">40.0</span><span class="token punctuation">,</span>
+  <span class="token property">"num_segments"</span><span class="token operator">:</span> <span class="token number">24</span><span class="token punctuation">,</span>
+  <span class="token property">"num_play_segments"</span><span class="token operator">:</span> <span class="token number">12</span><span class="token punctuation">,</span>
+  <span class="token property">"num_dead_segments"</span><span class="token operator">:</span> <span class="token number">12</span><span class="token punctuation">,</span>
+  <span class="token property">"segments"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"dead"</span><span class="token punctuation">,</span>
+      <span class="token property">"start_frame"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"end_frame"</span><span class="token operator">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
+      <span class="token property">"start_sec"</span><span class="token operator">:</span> <span class="token number">0.0</span><span class="token punctuation">,</span>
+      <span class="token property">"end_sec"</span><span class="token operator">:</span> <span class="token number">5.0</span><span class="token punctuation">,</span>
+      <span class="token property">"duration_sec"</span><span class="token operator">:</span> <span class="token number">5.0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"play"</span><span class="token punctuation">,</span>
+      <span class="token property">"start_frame"</span><span class="token operator">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
+      <span class="token property">"end_frame"</span><span class="token operator">:</span> <span class="token number">600</span><span class="token punctuation">,</span>
+      <span class="token property">"start_sec"</span><span class="token operator">:</span> <span class="token number">5.0</span><span class="token punctuation">,</span>
+      <span class="token property">"end_sec"</span><span class="token operator">:</span> <span class="token number">20.0</span><span class="token punctuation">,</span>
+      <span class="token property">"duration_sec"</span><span class="token operator">:</span> <span class="token number">15.0</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre><hr>
+<h2 id="15-performance-considerations">15. Performance Considerations </h2>
+<h3 id="gpu-utilisation">GPU Utilisation </h3>
+<ul>
+<li>Both TrackNet and YOLO use <strong>batched inference</strong> to maximise GPU throughput.</li>
+<li><strong>FP16 mixed precision</strong> (<code>torch.amp.autocast</code>) is enabled for TrackNet on CUDA devices.</li>
+<li>YOLO runs with <code>half=True</code> for FP16 inference.</li>
+<li><code>torch.compile</code> is attempted on the TrackNet model for additional optimisation (PyTorch 2.0+).</li>
+</ul>
+<h3 id="throughput-estimates">Throughput Estimates </h3>
+<ul>
+<li>Typical processing speed is ~24× slower than realtime on consumer GPUs (estimated ~0.042s per frame).</li>
+<li>The rendering phase is I/O-bound; FFmpeg pipe encoding is significantly faster than OpenCV's <code>VideoWriter</code>.</li>
+</ul>
+<h3 id="bottlenecks">Bottlenecks </h3>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Bottleneck</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Video decode</td>
+<td>CPU-bound sequential read</td>
+<td>Sequential reading avoids seek overhead</td>
+</tr>
+<tr>
+<td>Ball detection</td>
+<td>GPU compute</td>
+<td>Batching, FP16, torch.compile</td>
+</tr>
+<tr>
+<td>Player detection</td>
+<td>GPU compute</td>
+<td>Batching, FP16</td>
+</tr>
+<tr>
+<td>Classification</td>
+<td>CPU (negligible)</td>
+<td>Vectorised NumPy/SciPy operations</td>
+</tr>
+<tr>
+<td>Rendering</td>
+<td>I/O + CPU</td>
+<td>FFmpeg stdin pipe (single-pass)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tips-for-large-videos">Tips for Large Videos </h3>
+<ul>
+<li>Increase <code>chunk_frames</code> if you have ample RAM to reduce chunk transitions.</li>
+<li>Increase <code>tracknet.batch_size</code> and <code>yolo.batch_size</code> if GPU VRAM permits.</li>
+<li>Set <code>render_video: false</code> to skip video rendering and only generate the JSON report.</li>
+<li>Use <code>--no-court-detection</code> if the camera angle doesn't allow reliable sideline detection.</li>
+</ul>
+<hr>
+<h2 id="16-extending-the-pipeline">16. Extending the Pipeline </h2>
+<h3 id="adding-a-new-detection-module">Adding a New Detection Module </h3>
+<ol>
+<li>Create a new file in <code>src/</code> (e.g., <code>src/serve_detector.py</code>).</li>
+<li>Define a dataclass config in <code>config.py</code> and add it to <code>PipelineConfig</code>.</li>
+<li>Update <code>load_config()</code> to handle the new config section.</li>
+<li>Instantiate and call the module in the appropriate phase within <code>pipeline.py</code>.</li>
+<li>Feed its output into <code>StateClassifier.classify()</code> or create a new post-processing step.</li>
+</ol>
+<h3 id="modifying-the-classification-logic">Modifying the Classification Logic </h3>
+<p>The classifier's scoring weights and thresholds are fully exposed via configuration. For deeper changes:</p>
+<ul>
+<li>Add new signal components in <code>StateClassifier.classify()</code> (Step 1).</li>
+<li>Add corresponding weights and caps in <code>ClassifierConfig</code>.</li>
+<li>Update <code>_compute_play_score()</code> to include the new signal.</li>
+</ul>
+<h3 id="custom-video-overlays">Custom Video Overlays </h3>
+<p>Add new drawing calls in <code>renderer._annotate_frame()</code>. The function receives all per-frame data (ball position, player info, state, score) and returns the annotated frame.</p>
+<h3 id="supporting-non-linux-systems">Supporting Non-Linux Systems </h3>
+<p>The following components are Linux-specific and would need platform-conditional alternatives:</p>
+<ul>
+<li><code>/proc/meminfo</code> reading in <code>io_utils.get_available_ram_gb()</code></li>
+<li><code>/proc/self/status</code> reading in <code>io_utils.get_rss_mb()</code></li>
+<li><code>/proc</code> scanning in <code>pipeline._kill_stale_pipeline_processes()</code></li>
+<li><code>libc.so.6</code> <code>malloc_trim</code> call in the chunked loop</li>
+</ul>
+
+      </div>
+      <div class="md-sidebar-toc">
+<div class="md-toc">
+<details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#technical-documentation--tennis-playdead-time-detection-pipeline" class="md-toc-link"><p>Technical Documentation — Tennis Play/Dead Time Detection Pipeline</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#table-of-contents" class="md-toc-link">
+            <p>Table of Contents</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#1-project-overview" class="md-toc-link">
+            <ol>
+<li>Project Overview</li>
+</ol>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#2-architecture" class="md-toc-link">
+            <ol start="2">
+<li>Architecture</li>
+</ol>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#3-directory-structure" class="md-toc-link">
+            <ol start="3">
+<li>Directory Structure</li>
+</ol>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#4-installation--prerequisites" class="md-toc-link"><ol start="4">
+<li>Installation &amp; Prerequisites</li>
+</ol>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#system-requirements" class="md-toc-link">
+            <p>System Requirements</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#installation-steps" class="md-toc-link">
+            <p>Installation Steps</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#model-weights" class="md-toc-link">
+            <p>Model Weights</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#python-dependencies" class="md-toc-link">
+            <p>Python Dependencies</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#5-configuration-reference" class="md-toc-link"><ol start="5">
+<li>Configuration Reference</li>
+</ol>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#top-level-settings" class="md-toc-link">
+            <p>Top-level Settings</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#tracknet--ball-detection" class="md-toc-link">
+            <p><code>tracknet</code> — Ball Detection</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#yolo--player-detection" class="md-toc-link">
+            <p><code>yolo</code> — Player Detection</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#classifier--state-classification" class="md-toc-link">
+            <p><code>classifier</code> — State Classification</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#court--court-region-detection" class="md-toc-link">
+            <p><code>court</code> — Court Region Detection</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#6-pipeline-phases" class="md-toc-link"><ol start="6">
+<li>Pipeline Phases</li>
+</ol>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#61-phase-1--video-probing" class="md-toc-link">
+            <p>6.1 Phase 1 — Video Probing</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#62-phase-1b--court-region-detection" class="md-toc-link">
+            <p>6.2 Phase 1b — Court Region Detection</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#63-phase-2--chunked-detection-ball--player" class="md-toc-link">
+            <p>6.3 Phase 2 — Chunked Detection (Ball &amp; Player)</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#64-phase-3--state-classification" class="md-toc-link">
+            <p>6.4 Phase 3 — State Classification</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#65-phase-4--output-generation" class="md-toc-link">
+            <p>6.5 Phase 4 — Output Generation</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#7-module-reference" class="md-toc-link"><ol start="7">
+<li>Module Reference</li>
+</ol>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#71-configpy" class="md-toc-link">
+            <p>7.1 <code>config.py</code></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#72-pipelinepy" class="md-toc-link">
+            <p>7.2 <code>pipeline.py</code></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#73-ball_trackerpy" class="md-toc-link">
+            <p>7.3 <code>ball_tracker.py</code></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#74-player_detectorpy" class="md-toc-link">
+            <p>7.4 <code>player_detector.py</code></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#75-court_detectorpy" class="md-toc-link">
+            <p>7.5 <code>court_detector.py</code></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#76-state_classifierpy" class="md-toc-link">
+            <p>7.6 <code>state_classifier.py</code></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#77-rendererpy" class="md-toc-link">
+            <p>7.7 <code>renderer.py</code></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#78-io_utilspy" class="md-toc-link">
+            <p>7.8 <code>io_utils.py</code></p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#8-classification-algorithm-deep-dive" class="md-toc-link"><ol start="8">
+<li>Classification Algorithm Deep Dive</li>
+</ol>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#step-1--per-frame-raw-signals" class="md-toc-link">
+            <p>Step 1 — Per-frame Raw Signals</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#step-2--windowed-feature-smoothing" class="md-toc-link">
+            <p>Step 2 — Windowed Feature Smoothing</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#step-3--normalised-weighted-play-score" class="md-toc-link">
+            <p>Step 3 — Normalised Weighted Play Score</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#step-4--gaussian-temporal-smoothing" class="md-toc-link">
+            <p>Step 4 — Gaussian Temporal Smoothing</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#step-5--hysteresis-thresholding" class="md-toc-link">
+            <p>Step 5 — Hysteresis Thresholding</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#step-6--ball-in-bbox-gate" class="md-toc-link">
+            <p>Step 6 — Ball-in-Bbox Gate</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#step-7--minimum-duration-filter" class="md-toc-link">
+            <p>Step 7 — Minimum Duration Filter</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#step-8--isolated-play-filter" class="md-toc-link">
+            <p>Step 8 — Isolated Play Filter</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#9-court-detection-algorithm" class="md-toc-link"><ol start="9">
+<li>Court Detection Algorithm</li>
+</ol>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#algorithm-steps" class="md-toc-link">
+            <p>Algorithm Steps</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#filtering-behaviour" class="md-toc-link">
+            <p>Filtering Behaviour</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#10-memory-management--chunking" class="md-toc-link"><ol start="10">
+<li>Memory Management &amp; Chunking</li>
+</ol>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#auto-chunk-sizing" class="md-toc-link">
+            <p>Auto-Chunk Sizing</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#per-chunk-cleanup" class="md-toc-link">
+            <p>Per-Chunk Cleanup</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#tracknet-overlap" class="md-toc-link">
+            <p>TrackNet Overlap</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#11-system-benchmarking--hardware-requirements" class="md-toc-link"><ol start="11">
+<li>System Benchmarking &amp; Hardware Requirements</li>
+</ol>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#concurrent-model-resource-profile" class="md-toc-link">
+            <p>Concurrent Model Resource Profile</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#gpu-vram-breakdown-peak-during-phase-2" class="md-toc-link">
+            <p>GPU VRAM Breakdown (Peak, During Phase 2)</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#system-ram-breakdown-peak-1080p" class="md-toc-link">
+            <p>System RAM Breakdown (Peak, 1080p)</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#cpu-usage-profile" class="md-toc-link">
+            <p>CPU Usage Profile</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#known-memory-safety-caveats" class="md-toc-link">
+            <p>Known Memory Safety Caveats</p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#recommended-system-configurations" class="md-toc-link"><p>Recommended System Configurations</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#minimum-functional-oom-safe-with-tuning" class="md-toc-link">
+            <p>Minimum (functional; OOM-safe with tuning)</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#recommended-smooth-operation-no-oom-risk" class="md-toc-link">
+            <p>Recommended (smooth operation, no OOM risk)</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#optimal-fast-processing-4k-ready" class="md-toc-link">
+            <p>Optimal (fast processing, 4K-ready)</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#reference-throughput-1080p-10-min--30-fps--18k-frames" class="md-toc-link">
+            <p>Reference Throughput (1080p, 10 min @ 30 fps ≈ 18K frames)</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#config-knobs-to-tune-if-hitting-oom" class="md-toc-link">
+            <p>Config Knobs to Tune if Hitting OOM</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#12-cli-reference" class="md-toc-link">
+            <ol start="12">
+<li>CLI Reference</li>
+</ol>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#13-batch-processing" class="md-toc-link">
+            <ol start="13">
+<li>Batch Processing</li>
+</ol>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#14-output-formats" class="md-toc-link"><ol start="14">
+<li>Output Formats</li>
+</ol>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#annotated-video-_analysismp4" class="md-toc-link">
+            <p>Annotated Video (<code>*_analysis.mp4</code>)</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#json-report-_reportjson" class="md-toc-link">
+            <p>JSON Report (<code>*_report.json</code>)</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#15-performance-considerations" class="md-toc-link"><ol start="15">
+<li>Performance Considerations</li>
+</ol>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#gpu-utilisation" class="md-toc-link">
+            <p>GPU Utilisation</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#throughput-estimates" class="md-toc-link">
+            <p>Throughput Estimates</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#bottlenecks" class="md-toc-link">
+            <p>Bottlenecks</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#tips-for-large-videos" class="md-toc-link">
+            <p>Tips for Large Videos</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#16-extending-the-pipeline" class="md-toc-link"><ol start="16">
+<li>Extending the Pipeline</li>
+</ol>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#adding-a-new-detection-module" class="md-toc-link">
+            <p>Adding a New Detection Module</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#modifying-the-classification-logic" class="md-toc-link">
+            <p>Modifying the Classification Logic</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#custom-video-overlays" class="md-toc-link">
+            <p>Custom Video Overlays</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#supporting-non-linux-systems" class="md-toc-link">
+            <p>Supporting Non-Linux Systems</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+        </div>
+      </details>
+    
+</div>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>

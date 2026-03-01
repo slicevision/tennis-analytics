@@ -160,8 +160,9 @@ class BallTracker:
         Remove spatially-inconsistent detections.
 
         A detection is removed if the distance to both its predecessor
-        and successor exceeds the threshold — indicating a false positive
-        rather than genuine fast motion.
+        and successor exceeds the threshold *or* either neighbour has
+        no detection — indicating a false positive rather than genuine
+        fast motion.
         """
         max_d = self.cfg.outlier_max_dist
         n = len(ball_track)
